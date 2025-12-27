@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Tripura Now{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
+                    colors: { tripura: { red: '#be123c', dark: '#0f172a' } },
+                    animation: { 'marquee': 'marquee 25s linear infinite' },
+                    keyframes: { marquee: { '0%': { transform: 'translateX(100%)' }, '100%': { transform: 'translateX(-100%)' } } }
+                }
+            }
+        }
+    </script>
+    <style>.hide-scrollbar::-webkit-scrollbar {display: none;} .hide-scrollbar {-ms-overflow-style: none; scrollbar-width: none;}</style>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
+
+    <!-- Top Utility Bar -->
+    <div class="bg-slate-950 text-gray-400 text-xs py-1.5 px-4 hidden md:flex justify-between items-center border-b border-slate-800">
+        <div class="flex gap-4 items-center">
+            <span class="text-white font-bold">{% now "l, F j, Y" %}</span>
+            <div class="flex items-center gap-1"><i class="ph-fill ph-cloud-sun"></i> Agartala 28°C</div>
+        </div>
+        <div class="flex gap-4 items-center text-white">
+            <i class="ph ph-facebook-logo hover:text-blue-600 cursor-pointer"></i>
+            <i class="ph ph-twitter-logo hover:text-blue-400 cursor-pointer"></i>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white dark:bg-slate-900/95 backdrop-blur border-b border-gray-200 dark:border-slate-800 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden text-2xl"><i class="ph ph-list"></i></button>
+            </div>
+            <a href="{% url 'home' %}" class="absolute left-1/2 -translate-x-1/2 text-center group">
+                <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:scale-105 transition">
+                    TRIPURA<span class="text-tripura-red">NOW</span>
+                </h1>
+            </a>
+            <div class="flex items-center gap-3">
+                <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"><i class="ph ph-moon text-xl"></i></button>
+            </div>
+        </div>
+        <nav class="hidden md:block border-t border-gray-100 dark:border-slate-800 py-3">
+            <ul class="flex justify-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">
+                <li><a href="{% url 'home' %}" class="hover:text-tripura-red">Home</a></li>
+                <li><a href="#tripura" class="hover:text-tripura-red">Tripura</a></li>
+                <li><a href="#northeast" class="hover:text-tripura-red">Northeast</a></li>
+                <li><a href="#india" class="hover:text-tripura-red">India</a></li>
+                <li><a href="#global" class="hover:text-tripura-red">Global</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Breaking Ticker -->
+    {% if breaking_news %}
+    <div class="bg-tripura-red text-white text-sm font-medium py-2 overflow-hidden relative z-20">
+        <div class="container mx-auto px-4 flex items-center">
+            <span class="font-black uppercase text-[10px] bg-white text-tripura-red px-2 py-0.5 rounded-sm mr-4 animate-pulse shrink-0">LIVE</span>
+            <div class="overflow-hidden w-full relative h-6">
+                <div class="absolute whitespace-nowrap animate-marquee flex gap-12 items-center h-full">
+                    {% for news in breaking_news %}
+                        <span class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-white rounded-full"></span> {{ news.title }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Content Block -->
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 pt-16 pb-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white font-serif mb-4">TRIPURA<span class="text-tripura-red">NOW</span></h2>
+            <p class="text-sm text-slate-500 mb-6">The Voice of the Northeast.</p>
+            <p class="text-xs text-slate-400">&copy; {% now "Y" %} Tripura Now Media. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

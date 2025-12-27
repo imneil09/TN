@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <!-- HERO SECTION -->
+    <section class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 grid-rows-2 gap-4 md:h-[500px]">
+            
+            <!-- Main Hero -->
+            {% if hero_article %}
+            <a href="{% url 'article_detail' hero_article.slug %}" class="md:col-span-2 md:row-span-2 relative group overflow-hidden rounded-xl shadow-sm block">
+                {% if hero_article.image %}
+                <img src="{{ hero_article.image.url }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105 filter brightness-90 group-hover:brightness-100" alt="{{ hero_article.title }}">
+                {% endif %}
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                <div class="absolute top-4 left-4">
+                    <span class="bg-tripura-red text-white text-[10px] font-bold px-2 py-0.5 uppercase rounded-sm">{{ hero_article.category.name }}</span>
+                </div>
+                <div class="absolute bottom-0 left-0 p-6">
+                    <h2 class="text-2xl md:text-4xl font-bold text-white font-serif leading-tight mb-3 group-hover:underline decoration-tripura-red decoration-4">{{ hero_article.title }}</h2>
+                    <p class="text-gray-300 text-xs">By {{ hero_article.author }} • {{ hero_article.created_at|timesince }} ago</p>
+                </div>
+            </a>
+            {% endif %}
+
+            <!-- Sub Hero Articles -->
+            {% for article in sub_hero_articles %}
+            <a href="{% url 'article_detail' article.slug %}" class="relative group overflow-hidden rounded-xl shadow-sm block {% if forloop.last %}md:col-span-2{% else %}md:col-span-1{% endif %}">
+                {% if article.image %}
+                <img src="{{ article.image.url }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" alt="{{ article.title }}">
+                {% endif %}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+                <div class="absolute bottom-0 p-4">
+                    <span class="text-blue-400 font-bold text-[10px] uppercase">{{ article.category.name }}</span>
+                    <h3 class="text-white font-bold text-sm mt-1 leading-snug font-serif">{{ article.title }}</h3>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- TRIPURA FOCUS -->
+    <section id="tripura" class="bg-slate-50 dark:bg-slate-900 py-12 border-y border-gray-200 dark:border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+                <div>
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2 font-serif">
+                        <i class="ph-fill ph-map-pin text-tripura-red"></i> TRIPURA FOCUS
+                    </h2>
+                </div>
+                <!-- Static filters for now, JS can enable dynamic filtering later -->
+                <div class="flex gap-2 overflow-x-auto hide-scrollbar">
+                    <button class="text-xs font-bold px-4 py-1.5 rounded-full bg-tripura-red text-white">All</button>
+                    {% for dist in districts %}
+                    <button class="text-xs font-bold px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-gray-200 dark:border-slate-700 hover:border-tripura-red">{{ dist.name }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {% for news in tripura_news %}
+                <a href="{% url 'article_detail' news.slug %}" class="bg-white dark:bg-slate-800 rounded-xl shadow-sm overflow-hidden group hover:shadow-lg transition">
+                    <div class="relative h-48 overflow-hidden">
+                        {% if news.image %}
+                        <img src="{{ news.image.url }}" class="w-full h-full object-cover transition duration-700 group-hover:scale-105" alt="{{ news.title }}">
+                        {% endif %}
+                        {% if news.district %}
+                        <span class="absolute top-2 right-2 bg-black/70 text-white text-[10px] font-bold px-2 py-1 rounded flex items-center gap-1"><i class="ph-fill ph-map-pin"></i> {{ news.district.name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-slate-900 dark:text-white leading-tight mb-2 group-hover:text-tripura-red transition font-serif">{{ news.title }}</h3>
+                        <div class="text-gray-400 text-xs pt-4 border-t border-gray-100 dark:border-slate-700 flex justify-between">
+                            <span>{{ news.created_at|timesince }} ago</span>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    
+    <!-- REGIONAL SECTION (Simple List) -->
+    <section class="container mx-auto px-4 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Northeast -->
+            <div>
+                <h3 class="font-bold text-xl border-b-2 border-blue-600 pb-2 mb-6 uppercase">Northeast</h3>
+                <div class="space-y-6">
+                    {% for news in northeast_news %}
+                    <a href="{% url 'article_detail' news.slug %}" class="flex gap-4 group">
+                        {% if news.image %}
+                        <img src="{{ news.image.url }}" class="w-20 h-20 object-cover rounded" alt="img">
+                        {% endif %}
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-blue-600 leading-snug">{{ news.title }}</h4>
+                            <span class="text-[10px] text-gray-500">{{ news.created_at|date:"M d" }}</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+
+             <!-- India -->
+             <div>
+                <h3 class="font-bold text-xl border-b-2 border-orange-600 pb-2 mb-6 uppercase">India</h3>
+                <div class="space-y-6">
+                    {% for news in india_news %}
+                    <a href="{% url 'article_detail' news.slug %}" class="flex gap-4 group">
+                        {% if news.image %}
+                        <img src="{{ news.image.url }}" class="w-20 h-20 object-cover rounded" alt="img">
+                        {% endif %}
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-orange-600 leading-snug">{{ news.title }}</h4>
+                            <span class="text-[10px] text-gray-500">{{ news.created_at|date:"M d" }}</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            
+             <!-- Global -->
+             <div>
+                <h3 class="font-bold text-xl border-b-2 border-slate-600 pb-2 mb-6 uppercase">Global</h3>
+                <div class="space-y-6">
+                    {% for news in global_news %}
+                    <a href="{% url 'article_detail' news.slug %}" class="flex gap-4 group">
+                        {% if news.image %}
+                        <img src="{{ news.image.url }}" class="w-20 h-20 object-cover rounded" alt="img">
+                        {% endif %}
+                        <div>
+                            <h4 class="font-bold text-sm text-slate-900 dark:text-white group-hover:text-slate-600 leading-snug">{{ news.title }}</h4>
+                            <span class="text-[10px] text-gray-500">{{ news.created_at|date:"M d" }}</span>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+{% endblock %}

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tripura Now - The Voice of the Northeast</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="css/custom.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { tripura: { red: '#be123c', dark: '#0f172a' } },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'], display: ['Oswald', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-gray-100 transition-colors duration-300">
+
+    <div class="bg-slate-950 text-gray-400 text-[11px] py-1.5 px-4 hidden md:flex justify-between items-center border-b border-slate-800">
+        <div class="flex gap-4 items-center">
+            <span class="text-white font-bold">Saturday, Dec 27, 2025</span>
+            <div class="flex items-center gap-1"><i class="ph-fill ph-cloud-sun text-yellow-500"></i> Agartala 28°C</div>
+            <div class="h-3 w-[1px] bg-gray-700"></div>
+            <a href="#" class="hover:text-white">Obituaries</a>
+            <a href="#" class="hover:text-white">Jobs & Careers</a>
+            <a href="#" class="hover:text-white">Classifieds</a>
+        </div>
+        <div class="flex gap-3 items-center">
+            <select class="bg-transparent border-none text-xs focus:ring-0 cursor-pointer">
+                <option>English</option>
+                <option>Bengali</option>
+                <option>Kokborok</option>
+            </select>
+            <div class="flex gap-2">
+                <i class="ph-fill ph-facebook-logo hover:text-blue-600 cursor-pointer text-lg"></i>
+                <i class="ph-fill ph-twitter-logo hover:text-blue-400 cursor-pointer text-lg"></i>
+                <i class="ph-fill ph-youtube-logo hover:text-red-600 cursor-pointer text-lg"></i>
+            </div>
+            <button onclick="document.documentElement.classList.toggle('dark')" class="ml-2"><i class="ph-fill ph-moon text-lg hover:text-white"></i></button>
+        </div>
+    </div>
+
+    <header class="bg-white dark:bg-slate-900 shadow-sm relative z-40">
+        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <a href="index.html" class="flex-shrink-0">
+                <h1 class="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white">
+                    TRIPURA<span class="text-tripura-red">NOW</span>
+                </h1>
+                <p class="text-[10px] tracking-[0.2em] text-slate-500 uppercase font-bold text-center md:text-left mt-1">The Voice of the Northeast</p>
+            </a>
+            <div class="hidden md:flex ad-space w-[728px] h-[90px] rounded-md">
+                <span class="ad-label">ADVERTISEMENT</span>
+                Google Ad (728x90)
+            </div>
+        </div>
+
+        <div class="sticky top-0 bg-tripura-dark text-white border-t-4 border-tripura-red shadow-lg">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center h-12">
+                    <button class="md:hidden text-2xl"><i class="ph ph-list"></i></button>
+                    
+                    <nav class="hidden md:flex gap-6 text-xs font-bold uppercase tracking-wider h-full items-center">
+                        <a href="index.html" class="nav-link text-tripura-red">Home</a>
+                        <a href="category.html" class="nav-link hover:text-tripura-red">Tripura</a>
+                        <a href="category.html" class="nav-link hover:text-tripura-red">Northeast</a>
+                        <a href="category.html" class="nav-link hover:text-tripura-red">India</a>
+                        <a href="category.html" class="nav-link hover:text-tripura-red">Global</a>
+                        
+                        <div class="group relative h-full flex items-center cursor-pointer">
+                            <span class="nav-link hover:text-tripura-red flex items-center gap-1">Categories <i class="ph-bold ph-caret-down"></i></span>
+                            <div class="absolute top-full left-0 w-[600px] bg-white dark:bg-slate-900 text-slate-800 dark:text-gray-200 shadow-2xl rounded-b-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 p-6 grid grid-cols-3 gap-4 z-50 border-t-2 border-tripura-red">
+                                <div>
+                                    <h4 class="font-bold text-tripura-red mb-2 border-b border-gray-200 pb-1">News</h4>
+                                    <ul class="space-y-1 text-sm">
+                                        <li><a href="category.html" class="hover:text-tripura-red">Politics</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Crime & Justice</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Science & Tech</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Environment</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-tripura-red mb-2 border-b border-gray-200 pb-1">Lifestyle</h4>
+                                    <ul class="space-y-1 text-sm">
+                                        <li><a href="category.html" class="hover:text-tripura-red">Entertainment & Arts</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Health & Education</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Sports</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Opinion</a></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-tripura-red mb-2 border-b border-gray-200 pb-1">Services</h4>
+                                    <ul class="space-y-1 text-sm">
+                                        <li><a href="category.html" class="hover:text-tripura-red">Jobs & Careers</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Obituaries</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Weather</a></li>
+                                        <li><a href="category.html" class="hover:text-tripura-red">Business</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <div class="flex items-center border-l border-slate-700 pl-4">
+                        <i class="ph-bold ph-magnifying-glass hover:text-tripura-red cursor-pointer"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="bg-tripura-red text-white text-sm py-2 overflow-hidden relative z-30 shadow-md">
+        <div class="container mx-auto px-4 flex items-center">
+            <span class="font-black uppercase text-[10px] bg-white text-tripura-red px-2 py-0.5 rounded-sm mr-4 shrink-0 animate-pulse">BREAKING</span>
+            <div class="ticker-wrap">
+                <div class="ticker-item font-medium">
+                    <span class="mx-4">• CM Manik Saha announces new IT park in Agartala</span>
+                    <span class="mx-4">• Heavy rains predicted for North Tripura district</span>
+                    <span class="mx-4">• Northeast Frontier Railway to start new express train</span>
+                    <span class="mx-4">• Global markets see a downturn amidst oil crisis</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="container mx-auto px-4 py-6">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[550px]">
+            
+            <div class="md:col-span-6 relative rounded-2xl overflow-hidden shadow-lg group card-zoom h-[300px] md:h-full cursor-pointer">
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Hero">
+                <div class="absolute inset-0 card-overlay"></div>
+                <div class="absolute top-4 left-4">
+                    <span class="bg-tripura-red text-white text-[10px] font-bold px-3 py-1 uppercase rounded shadow-sm">Politics</span>
+                </div>
+                <div class="absolute bottom-0 left-0 p-6 md:p-8">
+                    <h2 class="text-2xl md:text-4xl font-bold text-white leading-tight mb-2 font-serif group-hover:underline decoration-tripura-red decoration-4">Major Infrastructure Revamp Announced for Agartala Smart City Project</h2>
+                    <p class="text-gray-200 text-xs md:text-sm line-clamp-2 mb-2">The state government has allocated ₹500 Crores for the development of new flyovers and drainage systems.</p>
+                    <span class="text-gray-400 text-[10px] font-bold uppercase">By Bureau • 2 hrs ago</span>
+                </div>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col gap-6">
+                <div class="relative flex-1 rounded-2xl overflow-hidden shadow-md group card-zoom cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1541560052-77ec1bbc09f7?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Sub1">
+                    <div class="absolute inset-0 card-overlay"></div>
+                    <div class="absolute bottom-0 p-4">
+                        <span class="text-blue-400 text-[10px] font-bold uppercase">Sports</span>
+                        <h3 class="text-white font-bold text-lg leading-snug font-serif mt-1">Local Cricket Tournament Finals Scheduled</h3>
+                    </div>
+                </div>
+                <div class="relative flex-1 rounded-2xl overflow-hidden shadow-md group card-zoom cursor-pointer">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" class="w-full h-full object-cover" alt="Sub2">
+                    <div class="absolute inset-0 card-overlay"></div>
+                    <div class="absolute bottom-0 p-4">
+                        <span class="text-green-400 text-[10px] font-bold uppercase">Technology</span>
+                        <h3 class="text-white font-bold text-lg leading-snug font-serif mt-1">Tripura Tech Startups on the Rise</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-3 flex flex-col gap-6">
+                <div class="ad-space w-full h-[250px] rounded-xl">
+                    <span class="ad-label">ADVERTISEMENT</span>
+                    Google Ad (300x250)
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-gray-100 dark:border-slate-800 flex-1 overflow-y-auto">
+                    <h3 class="text-xs font-black uppercase text-slate-500 mb-3 tracking-widest border-b pb-2">Trending Now</h3>
+                    <ul class="space-y-4">
+                        <li class="group cursor-pointer">
+                            <span class="text-tripura-red font-black text-lg float-left mr-2">1</span>
+                            <h4 class="text-sm font-bold leading-snug group-hover:text-tripura-red">New Education Policy implementation details released.</h4>
+                        </li>
+                        <li class="group cursor-pointer">
+                            <span class="text-tripura-red font-black text-lg float-left mr-2">2</span>
+                            <h4 class="text-sm font-bold leading-snug group-hover:text-tripura-red">Gold prices drop significantly in local markets.</h4>
+                        </li>
+                        <li class="group cursor-pointer">
+                            <span class="text-tripura-red font-black text-lg float-left mr-2">3</span>
+                            <h4 class="text-sm font-bold leading-snug group-hover:text-tripura-red">Weather alert: Cyclone warning for Bay of Bengal.</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="md:hidden container mx-auto px-4 mb-6">
+        <div class="ad-space w-full h-[50px] rounded">
+            <span class="ad-label">SPONSORED</span>
+            Mobile Banner (320x50)
+        </div>
+    </div>
+
+    <section class="bg-slate-50 dark:bg-slate-900 py-12 border-y border-gray-200 dark:border-slate-800">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+                <div>
+                    <h2 class="section-header text-3xl font-black text-slate-900 dark:text-white">Tripura Focus</h2>
+                    <p class="text-slate-500 text-sm mt-1 ml-4">Local news from every district.</p>
+                </div>
+                <div class="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto hide-scrollbar">
+                    <button class="px-4 py-1 bg-tripura-red text-white text-xs font-bold rounded-full">All</button>
+                    <button class="px-4 py-1 bg-white dark:bg-slate-800 border dark:border-slate-700 hover:border-tripura-red text-xs font-bold rounded-full whitespace-nowrap">West Tripura</button>
+                    <button class="px-4 py-1 bg-white dark:bg-slate-800 border dark:border-slate-700 hover:border-tripura-red text-xs font-bold rounded-full whitespace-nowrap">Gomati</button>
+                    <button class="px-4 py-1 bg-white dark:bg-slate-800 border dark:border-slate-700 hover:border-tripura-red text-xs font-bold rounded-full whitespace-nowrap">North</button>
+                    <button class="px-4 py-1 bg-white dark:bg-slate-800 border dark:border-slate-700 hover:border-tripura-red text-xs font-bold rounded-full whitespace-nowrap">Dhalai</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <article class="bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1560179707-f14e90ef3623?q=80&w=2073&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" alt="news">
+                            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm"><i class="ph-fill ph-map-pin"></i> Udaipur</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase text-gray-500">
+                                <span class="text-tripura-red">Crime & Justice</span>
+                                <span>•</span>
+                                <span>3 hours ago</span>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif leading-tight text-slate-900 dark:text-white group-hover:text-tripura-red transition">Police crack down on illegal border trade in Sonamura</h3>
+                        </div>
+                    </article>
+                     <article class="bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1526304640152-d4619684e484?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" alt="news">
+                            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm"><i class="ph-fill ph-map-pin"></i> Agartala</span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase text-gray-500">
+                                <span class="text-tripura-red">Business</span>
+                                <span>•</span>
+                                <span>5 hours ago</span>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif leading-tight text-slate-900 dark:text-white group-hover:text-tripura-red transition">Agartala markets see surge in holiday shopping ahead of Durga Puja</h3>
+                        </div>
+                    </article>
+                    <article class="bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden group">
+                        <div class="h-48 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?q=80&w=2000&auto=format&fit=crop" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" alt="news">
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase text-gray-500">
+                                <span class="text-tripura-red">Health</span>
+                                <span>•</span>
+                                <span>1 day ago</span>
+                            </div>
+                            <h3 class="text-lg font-bold font-serif leading-tight text-slate-900 dark:text-white group-hover:text-tripura-red transition">New cancer treatment facility inaugurated at GBP Hospital</h3>
+                        </div>
+                    </article>
+                    <div class="bg-gray-100 dark:bg-slate-800 rounded-xl border border-dashed border-gray-300 flex items-center justify-center min-h-[200px]">
+                        <div class="text-center">
+                            <p class="text-xs font-bold text-gray-400 mb-2">ADVERTISEMENT</p>
+                            <div class="w-[300px] h-[250px] bg-gray-200 dark:bg-slate-700 mx-auto flex items-center justify-center text-xs text-gray-500">
+                                Google Ad (300x250)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-1 space-y-8">
+                     <div class="bg-blue-50 dark:bg-slate-800 p-5 rounded-xl border border-blue-100 dark:border-slate-700">
+                        <h4 class="font-bold text-blue-900 dark:text-blue-400 uppercase text-xs mb-4 flex items-center gap-2"><i class="ph-fill ph-briefcase"></i> Jobs & Careers</h4>
+                        <ul class="space-y-4">
+                            <li class="border-b border-blue-200 dark:border-slate-700 pb-2">
+                                <a href="#" class="block hover:text-blue-600">
+                                    <h5 class="font-bold text-sm text-slate-800 dark:text-gray-200">TPSC Recruitment 2025</h5>
+                                    <span class="text-[10px] text-gray-500">Last Date: Jan 30</span>
+                                </a>
+                            </li>
+                            <li class="border-b border-blue-200 dark:border-slate-700 pb-2">
+                                <a href="#" class="block hover:text-blue-600">
+                                    <h5 class="font-bold text-sm text-slate-800 dark:text-gray-200">Junior Engineer Posts</h5>
+                                    <span class="text-[10px] text-gray-500">Apply Now</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <button class="w-full mt-4 bg-blue-600 text-white text-xs font-bold py-2 rounded hover:bg-blue-700 transition">View All Jobs</button>
+                    </div>
+
+                    <div class="ad-space w-full h-[600px] rounded-xl">
+                        <span class="ad-label">ADVERTISEMENT</span>
+                        Tall Banner (160x600)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <div>
+                <div class="flex justify-between items-center mb-4 border-b-2 border-orange-500 pb-2">
+                    <h3 class="font-black text-xl uppercase">Northeast</h3>
+                    <a href="#" class="text-[10px] font-bold text-orange-500 hover:underline">VIEW ALL</a>
+                </div>
+                <div class="space-y-4">
+                    <a href="article.html" class="flex gap-3 group">
+                        <img src="https://images.unsplash.com/photo-1623941008069-4226d97e743a?q=80&w=200&auto=format&fit=crop" class="w-24 h-16 object-cover rounded" alt="ne">
+                        <div>
+                            <h4 class="font-bold text-sm leading-snug group-hover:text-orange-500 transition">Floods affect 2 lakh people in Assam</h4>
+                            <span class="text-[10px] text-gray-400">Yesterday</span>
+                        </div>
+                    </a>
+                    <a href="article.html" class="flex gap-3 group">
+                        <img src="https://images.unsplash.com/photo-1534237710431-e2fc698436d5?q=80&w=200&auto=format&fit=crop" class="w-24 h-16 object-cover rounded" alt="ne">
+                        <div>
+                            <h4 class="font-bold text-sm leading-snug group-hover:text-orange-500 transition">Hornbill Festival preparations begin in Nagaland</h4>
+                            <span class="text-[10px] text-gray-400">2 Days ago</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center mb-4 border-b-2 border-blue-500 pb-2">
+                    <h3 class="font-black text-xl uppercase">India</h3>
+                    <a href="#" class="text-[10px] font-bold text-blue-500 hover:underline">VIEW ALL</a>
+                </div>
+                <div class="space-y-4">
+                    <a href="article.html" class="flex gap-3 group">
+                        <img src="https://images.unsplash.com/photo-1532375810709-75b1da00537c?q=80&w=200&auto=format&fit=crop" class="w-24 h-16 object-cover rounded" alt="india">
+                        <div>
+                            <h4 class="font-bold text-sm leading-snug group-hover:text-blue-500 transition">Parliament session starts with heated debate</h4>
+                            <span class="text-[10px] text-gray-400">10 mins ago</span>
+                        </div>
+                    </a>
+                    <div class="ad-space w-full h-[60px] rounded">
+                        <span class="ad-label">AD</span>
+                        Native Ad
+                    </div>
+                    <a href="article.html" class="flex gap-3 group">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=200&auto=format&fit=crop" class="w-24 h-16 object-cover rounded" alt="india">
+                        <div>
+                            <h4 class="font-bold text-sm leading-snug group-hover:text-blue-500 transition">Supreme Court delivers verdict on key case</h4>
+                            <span class="text-[10px] text-gray-400">1 hour ago</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <div class="flex justify-between items-center mb-4 border-b-2 border-gray-500 pb-2">
+                    <h3 class="font-black text-xl uppercase">Global</h3>
+                    <a href="#" class="text-[10px] font-bold text-gray-500 hover:underline">VIEW ALL</a>
+                </div>
+                <div class="space-y-4">
+                    <a href="article.html" class="flex gap-3 group">
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=200&auto=format&fit=crop" class="w-24 h-16 object-cover rounded" alt="global">
+                        <div>
+                            <h4 class="font-bold text-sm leading-snug group-hover:text-gray-500 transition">SpaceX launches new satellite constellation</h4>
+                            <span class="text-[10px] text-gray-400">Today</span>
+                        </div>
+                    </a>
+                    <a href="article.html" class="flex gap-3 group">
+                        <img src="https://images.unsplash.com/photo-1526304640152-d4619684e484?q=80&w=200&auto=format&fit=crop" class="w-24 h-16 object-cover rounded" alt="global">
+                        <div>
+                            <h4 class="font-bold text-sm leading-snug group-hover:text-gray-500 transition">Oil prices fluctuate as markets open in Asia</h4>
+                            <span class="text-[10px] text-gray-400">Yesterday</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-slate-950 text-white pt-16 pb-24">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-800 pb-8 mb-8">
+                <div class="md:col-span-1">
+                    <h2 class="text-3xl font-black mb-4">TRIPURA<span class="text-tripura-red">NOW</span></h2>
+                    <p class="text-gray-400 text-sm mb-4">Tripura's most trusted digital news platform, bringing you real-time updates from the Northeast and beyond.</p>
+                    <div class="flex gap-4">
+                        <i class="ph-fill ph-facebook-logo text-2xl hover:text-tripura-red cursor-pointer"></i>
+                        <i class="ph-fill ph-twitter-logo text-2xl hover:text-tripura-red cursor-pointer"></i>
+                        <i class="ph-fill ph-instagram-logo text-2xl hover:text-tripura-red cursor-pointer"></i>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-tripura-red mb-4 uppercase text-xs tracking-wider">Categories</h4>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-white">Tripura News</a></li>
+                        <li><a href="#" class="hover:text-white">Northeast</a></li>
+                        <li><a href="#" class="hover:text-white">India</a></li>
+                        <li><a href="#" class="hover:text-white">Global</a></li>
+                        <li><a href="#" class="hover:text-white">Sports</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-tripura-red mb-4 uppercase text-xs tracking-wider">Services</h4>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-white">Obituaries</a></li>
+                        <li><a href="#" class="hover:text-white">Classifieds</a></li>
+                        <li><a href="#" class="hover:text-white">Jobs & Careers</a></li>
+                        <li><a href="#" class="hover:text-white">Advertise with Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-tripura-red mb-4 uppercase text-xs tracking-wider">Legal</h4>
+                    <ul class="text-sm text-gray-400 space-y-2">
+                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white">Grievance Redressal</a></li>
+                        <li><a href="#" class="hover:text-white">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-xs text-gray-600">
+                &copy; 2025 Tripura Now Media Pvt Ltd. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <div class="sticky-ad-footer md:hidden h-[60px] flex items-center justify-center bg-white border-t border-gray-200">
+        <div class="text-xs text-gray-400 font-bold">Google Ad (Mobile Sticky)</div>
+    </div>
+
+</body>
+</html>

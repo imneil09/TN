@@ -4,18 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Tripura Now - The Voice of the Northeast{% endblock %}</title>
+    <title>{% block title %}Tripura Now{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
-    
     <script>
         tailwind.config = {
             darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] },
                     colors: { tripura: { red: '#be123c', dark: '#0f172a' } },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'], display: ['Oswald', 'sans-serif'] }
+                    animation: { 'marquee': 'marquee 25s linear infinite' },
+                    keyframes: { marquee: { '0%': { transform: 'translateX(100%)' }, '100%': { transform: 'translateX(-100%)' } } }
                 }
             }
         }
@@ -24,67 +26,52 @@
 </head>
 <body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-gray-100 transition-colors duration-300 flex flex-col min-h-screen">
 
-    <div class="bg-slate-950 text-gray-400 text-[11px] py-1.5 px-4 hidden md:flex justify-between items-center border-b border-slate-800">
+    <div class="bg-slate-950 text-gray-400 text-xs py-1.5 px-4 hidden md:flex justify-between items-center border-b border-slate-800">
         <div class="flex gap-4 items-center">
-            <span class="text-white font-bold">{% now "l, M j, Y" %}</span>
-            <div class="flex items-center gap-1"><i class="ph-fill ph-cloud-sun text-yellow-500"></i> Agartala 28°C</div>
-            <div class="h-3 w-[1px] bg-gray-700"></div>
-            <a href="#" class="hover:text-white">Obituaries</a>
-            <a href="#" class="hover:text-white">Jobs</a>
+            <span class="text-white font-bold">{% now "l, F j, Y" %}</span>
+            <div class="flex items-center gap-1"><i class="ph-fill ph-cloud-sun"></i> Agartala 28°C</div>
         </div>
-        <div class="flex gap-3 items-center">
-            <div class="flex gap-2">
-                <i class="ph-fill ph-facebook-logo hover:text-blue-600 cursor-pointer text-lg"></i>
-                <i class="ph-fill ph-twitter-logo hover:text-blue-400 cursor-pointer text-lg"></i>
-                <i class="ph-fill ph-youtube-logo hover:text-red-600 cursor-pointer text-lg"></i>
-            </div>
-            <button onclick="document.documentElement.classList.toggle('dark')" class="ml-2"><i class="ph-fill ph-moon text-lg hover:text-white"></i></button>
+        <div class="flex gap-4 items-center text-white">
+            <i class="ph ph-facebook-logo hover:text-blue-600 cursor-pointer"></i>
+            <i class="ph ph-twitter-logo hover:text-blue-400 cursor-pointer"></i>
         </div>
     </div>
 
-    <header class="bg-white dark:bg-slate-900 shadow-sm relative z-40">
-        <div class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
-            <a href="{% url 'home' %}" class="flex-shrink-0 text-center md:text-left">
-                <h1 class="text-4xl md:text-6xl font-black tracking-tighter text-slate-900 dark:text-white">
+    <header class="sticky top-0 z-50 bg-white dark:bg-slate-900/95 backdrop-blur border-b border-gray-200 dark:border-slate-800 shadow-sm">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center relative">
+            <div class="flex items-center gap-4">
+                <button class="md:hidden text-2xl"><i class="ph ph-list"></i></button>
+            </div>
+            <a href="{% url 'home' %}" class="absolute left-1/2 -translate-x-1/2 text-center group">
+                <h1 class="text-3xl md:text-5xl font-black tracking-tighter text-slate-900 dark:text-white group-hover:scale-105 transition">
                     TRIPURA<span class="text-tripura-red">NOW</span>
                 </h1>
-                <p class="text-[10px] tracking-[0.2em] text-slate-500 uppercase font-bold mt-1">The Voice of the Northeast</p>
             </a>
-            <div class="hidden md:flex ad-space w-[728px] h-[90px] rounded-md">
-                <span class="ad-label">ADVERTISEMENT</span>
-                Google Ad (728x90)
+            <div class="flex items-center gap-3">
+                <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800"><i class="ph ph-moon text-xl"></i></button>
             </div>
         </div>
-
-        <div class="sticky top-0 bg-tripura-dark text-white border-t-4 border-tripura-red shadow-lg">
-            <div class="container mx-auto px-4">
-                <div class="flex justify-between items-center h-12">
-                    <button class="md:hidden text-2xl"><i class="ph ph-list"></i></button>
-                    
-                    <nav class="hidden md:flex gap-6 text-xs font-bold uppercase tracking-wider h-full items-center">
-                        <a href="{% url 'home' %}" class="nav-link text-tripura-red">Home</a>
-                        <a href="#tripura" class="nav-link hover:text-tripura-red">Tripura</a>
-                        <a href="#northeast" class="nav-link hover:text-tripura-red">Northeast</a>
-                        <a href="#india" class="nav-link hover:text-tripura-red">India</a>
-                        <a href="#global" class="nav-link hover:text-tripura-red">Global</a>
-                    </nav>
-
-                    <div class="flex items-center border-l border-slate-700 pl-4">
-                        <i class="ph-bold ph-magnifying-glass hover:text-tripura-red cursor-pointer"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <nav class="hidden md:block border-t border-gray-100 dark:border-slate-800 py-3">
+            <ul class="flex justify-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">
+                <li><a href="{% url 'home' %}" class="hover:text-tripura-red">Home</a></li>
+                <li><a href="/category/tripura/" class="hover:text-tripura-red">Tripura</a></li>
+                <li><a href="/category/northeast/" class="hover:text-tripura-red">Northeast</a></li>
+                <li><a href="/category/india/" class="hover:text-tripura-red">India</a></li>
+                <li><a href="/category/global/" class="hover:text-tripura-red">Global</a></li>
+            </ul>
+        </nav>
     </header>
 
     {% if breaking_news %}
-    <div class="bg-tripura-red text-white text-sm py-2 overflow-hidden relative z-30 shadow-md">
+    <div class="bg-tripura-red text-white text-sm font-medium py-2 overflow-hidden relative z-20">
         <div class="container mx-auto px-4 flex items-center">
-            <span class="font-black uppercase text-[10px] bg-white text-tripura-red px-2 py-0.5 rounded-sm mr-4 shrink-0 animate-pulse">BREAKING</span>
-            <div class="ticker-wrap">
-                <div class="ticker-item font-medium">
+            <span class="font-black uppercase text-[10px] bg-white text-tripura-red px-2 py-0.5 rounded-sm mr-4 animate-pulse shrink-0">LIVE</span>
+            <div class="overflow-hidden w-full relative h-6">
+                <div class="absolute whitespace-nowrap animate-marquee flex gap-12 items-center h-full">
                     {% for news in breaking_news %}
-                    <span class="mx-4">• {{ news.title }}</span>
+                        <a href="{% url 'article_detail' news.slug %}" class="flex items-center gap-2 hover:underline">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full"></span> {{ news.title }}
+                        </a>
                     {% endfor %}
                 </div>
             </div>
@@ -95,46 +82,12 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="bg-slate-950 text-white pt-16 pb-24 mt-auto">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 border-b border-gray-800 pb-8 mb-8">
-                <div class="md:col-span-1">
-                    <h2 class="text-3xl font-black mb-4">TRIPURA<span class="text-tripura-red">NOW</span></h2>
-                    <p class="text-gray-400 text-sm mb-4">Tripura's most trusted digital news platform.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold text-tripura-red mb-4 uppercase text-xs tracking-wider">Sections</h4>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li><a href="#" class="hover:text-white">Tripura</a></li>
-                        <li><a href="#" class="hover:text-white">Northeast</a></li>
-                        <li><a href="#" class="hover:text-white">Sports</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-tripura-red mb-4 uppercase text-xs tracking-wider">Services</h4>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li><a href="#" class="hover:text-white">Advertise</a></li>
-                        <li><a href="#" class="hover:text-white">Careers</a></li>
-                        <li><a href="#" class="hover:text-white">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold text-tripura-red mb-4 uppercase text-xs tracking-wider">Legal</h4>
-                    <ul class="text-sm text-gray-400 space-y-2">
-                        <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:text-white">Terms</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="text-center text-xs text-gray-600">
-                &copy; {% now "Y" %} Tripura Now Media Pvt Ltd. All rights reserved.
-            </div>
+    <footer class="bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-slate-800 pt-16 pb-8 mt-auto">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-black text-slate-900 dark:text-white font-serif mb-4">TRIPURA<span class="text-tripura-red">NOW</span></h2>
+            <p class="text-sm text-slate-500 mb-6">The Voice of the Northeast.</p>
+            <p class="text-xs text-slate-400">&copy; {% now "Y" %} Tripura Now Media. All rights reserved.</p>
         </div>
     </footer>
-
-    <div class="sticky-ad-footer md:hidden h-[60px] flex items-center justify-center bg-white border-t border-gray-200">
-        <div class="text-xs text-gray-400 font-bold">Google Ad (Mobile Sticky)</div>
-    </div>
-
 </body>
 </html>

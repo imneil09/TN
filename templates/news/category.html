@@ -1,83 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Politics | Tripura Now</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="css/custom.css">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: { tripura: { red: '#be123c', dark: '#0f172a' } },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], serif: ['Merriweather', 'serif'] }
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-white dark:bg-slate-950 text-slate-900 dark:text-gray-100">
+{% extends 'base.html' %}
 
-    <header class="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-800">
-        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <a href="index.html" class="font-black text-2xl">TRIPURA<span class="text-tripura-red">NOW</span></a>
-            <nav class="hidden md:flex gap-4 text-xs font-bold uppercase">
-                <a href="#" class="text-tripura-red">Politics</a>
-                <a href="#" class="hover:text-tripura-red">Business</a>
-                <a href="#" class="hover:text-tripura-red">Sports</a>
-            </nav>
-        </div>
-    </header>
+{% block title %}{{ category.name }} | Tripura Now{% endblock %}
 
-    <main class="container mx-auto px-4 py-8">
-        <div class="mb-8 border-l-4 border-tripura-red pl-4">
-            <h1 class="text-4xl font-black font-serif">Politics</h1>
-            <p class="text-gray-500">Latest updates on state and national political affairs.</p>
+{% block content %}
+<main class="container mx-auto px-4 py-8">
+    <div class="mb-8 border-l-4 border-tripura-red pl-4">
+        <h1 class="text-4xl font-black font-serif">{{ category.name }}</h1>
+        <p class="text-gray-500">Latest updates from {{ category.name }}.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div class="lg:col-span-3 space-y-6">
+            {% for article in articles %}
+            <a href="{% url 'article_detail' article.slug %}" class="flex flex-col md:flex-row gap-4 bg-white dark:bg-slate-900 group border-b border-gray-100 dark:border-slate-800 pb-6">
+                {% if article.image %}
+                <div class="md:w-1/3 overflow-hidden rounded-xl">
+                    <img src="{{ article.image.url }}" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
+                </div>
+                {% endif %}
+                <div class="{% if article.image %}md:w-2/3{% else %}w-full{% endif %} py-2">
+                    <span class="text-tripura-red text-[10px] font-bold uppercase">{{ article.category.name }}</span>
+                    <h3 class="text-xl font-bold font-serif mb-2 group-hover:text-tripura-red">{{ article.title }}</h3>
+                    <p class="text-sm text-gray-500 line-clamp-2 mb-3">{{ article.content|striptags|truncatewords:30 }}</p>
+                    <span class="text-[10px] text-gray-400">By {{ article.author }} • {{ article.created_at|timesince }} ago</span>
+                </div>
+            </a>
+            {% empty %}
+            <p>No articles found in this category.</p>
+            {% endfor %}
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div class="lg:col-span-3 space-y-6">
-                
-                <a href="article.html" class="flex flex-col md:flex-row gap-4 bg-white dark:bg-slate-900 group">
-                    <div class="md:w-1/3 overflow-hidden rounded-xl">
-                        <img src="https://images.unsplash.com/photo-1529101091760-61df5283f5b0?q=80&w=2070&auto=format&fit=crop" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
-                    </div>
-                    <div class="md:w-2/3 py-2">
-                        <span class="text-tripura-red text-[10px] font-bold uppercase">Election 2025</span>
-                        <h3 class="text-xl font-bold font-serif mb-2 group-hover:text-tripura-red">Opposition rallies in Agartala draw massive crowds ahead of by-polls</h3>
-                        <p class="text-sm text-gray-500 line-clamp-2 mb-3">Thousands gathered at the Astabal grounds today as the opposition leader criticized the current policies regarding employment...</p>
-                        <span class="text-[10px] text-gray-400">By Staff • 4 hours ago</span>
-                    </div>
-                </a>
-
-                <div class="ad-space w-full h-[120px] rounded">
-                    <span class="ad-label">ADVERTISEMENT</span>
-                    Horizontal Banner
-                </div>
-
-                <a href="article.html" class="flex flex-col md:flex-row gap-4 bg-white dark:bg-slate-900 group">
-                    <div class="md:w-1/3 overflow-hidden rounded-xl">
-                        <img src="https://images.unsplash.com/photo-1555848962-6e79363ec58f?q=80&w=2000&auto=format&fit=crop" class="w-full h-48 object-cover transition duration-500 group-hover:scale-110">
-                    </div>
-                    <div class="md:w-2/3 py-2">
-                        <span class="text-tripura-red text-[10px] font-bold uppercase">Policy</span>
-                        <h3 class="text-xl font-bold font-serif mb-2 group-hover:text-tripura-red">Cabinet approves new tourism policy to attract foreign visitors</h3>
-                        <p class="text-sm text-gray-500 line-clamp-2 mb-3">The new framework simplifies visa procedures for tourists entering via the Akhaura checkpost.</p>
-                        <span class="text-[10px] text-gray-400">By Bureau • 1 day ago</span>
-                    </div>
-                </a>
-
-            </div>
-
-            <div class="lg:col-span-1">
-                <div class="ad-space w-full h-[600px] rounded-xl sticky top-24">
-                    <span class="ad-label">ADVERTISEMENT</span>
-                    Sidebar
-                </div>
+        <div class="lg:col-span-1">
+            <div class="bg-gray-100 dark:bg-slate-800 rounded-xl h-[400px] flex items-center justify-center text-gray-400 text-xs">
+                ADVERTISEMENT
             </div>
         </div>
-    </main>
-
-</body>
-</html>
+    </div>
+</main>
+{% endblock %}

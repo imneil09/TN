@@ -3,21 +3,28 @@
 {% block title %}Home | Tripura Now{% endblock %}
 
 {% block content %}
-<main class="container mx-auto px-4 py-6">
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 h-auto md:h-[550px]">
+<main class="container mx-auto px-4 py-8 space-y-12">
+    
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:h-[550px]">
         
         {% if hero_article %}
-        <div class="md:col-span-6 relative rounded-2xl overflow-hidden shadow-lg group card-zoom h-[300px] md:h-full cursor-pointer">
+        <div class="md:col-span-6 relative rounded-2xl overflow-hidden group h-[300px] md:h-full cursor-pointer shadow-xl">
             <a href="{% url 'article_detail' hero_article.slug %}">
-                <img src="{{ hero_article.image.url }}" class="w-full h-full object-cover" alt="{{ hero_article.title }}">
-                <div class="absolute inset-0 card-overlay"></div>
+                <img src="{{ hero_article.image.url }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ hero_article.title }}">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90"></div>
+                
                 <div class="absolute top-4 left-4">
-                    <span class="bg-tripura-red text-white text-[10px] font-bold px-3 py-1 uppercase rounded shadow-sm">{{ hero_article.category.name }}</span>
+                    <span class="bg-tripura-red text-white text-[10px] font-bold px-3 py-1 uppercase rounded-full shadow-lg tracking-wide">{{ hero_article.category.name }}</span>
                 </div>
-                <div class="absolute bottom-0 left-0 p-6 md:p-8">
-                    <h2 class="text-2xl md:text-4xl font-bold text-white leading-tight mb-2 font-serif group-hover:underline decoration-tripura-red decoration-4">{{ hero_article.title }}</h2>
-                    <p class="text-gray-200 text-xs md:text-sm line-clamp-2 mb-2">{{ hero_article.content|striptags|truncatewords:20 }}</p>
-                    <span class="text-gray-400 text-[10px] font-bold uppercase">By {{ hero_article.author }} • {{ hero_article.created_at|timesince }} ago</span>
+                
+                <div class="absolute bottom-0 left-0 p-6 md:p-8 w-full">
+                    <h2 class="text-2xl md:text-4xl font-black text-white leading-tight mb-3 font-serif drop-shadow-lg group-hover:underline decoration-tripura-red decoration-4 underline-offset-4">{{ hero_article.title }}</h2>
+                    <p class="text-gray-200 text-sm line-clamp-2 mb-3 opacity-90 font-medium hidden md:block">{{ hero_article.content|striptags|truncatewords:20 }}</p>
+                    <div class="flex items-center gap-2 text-gray-300 text-[10px] font-bold uppercase tracking-wider">
+                        <span><i class="ph-fill ph-user text-tripura-red"></i> {{ hero_article.author }}</span>
+                        <span>•</span>
+                        <span>{{ hero_article.created_at|timesince }} ago</span>
+                    </div>
                 </div>
             </a>
         </div>
@@ -25,32 +32,31 @@
 
         <div class="md:col-span-3 flex flex-col gap-6">
             {% for article in sub_hero_articles %}
-            <div class="relative flex-1 rounded-2xl overflow-hidden shadow-md group card-zoom cursor-pointer">
+            <div class="relative flex-1 rounded-2xl overflow-hidden group cursor-pointer shadow-lg">
                 <a href="{% url 'article_detail' article.slug %}">
-                    <img src="{{ article.image.url }}" class="w-full h-full object-cover" alt="{{ article.title }}">
-                    <div class="absolute inset-0 card-overlay"></div>
-                    <div class="absolute bottom-0 p-4">
-                        <span class="text-blue-400 text-[10px] font-bold uppercase">{{ article.category.name }}</span>
-                        <h3 class="text-white font-bold text-lg leading-snug font-serif mt-1">{{ article.title|truncatechars:50 }}</h3>
+                    <img src="{{ article.image.url }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent"></div>
+                    <div class="absolute bottom-0 p-5">
+                        <span class="text-blue-400 text-[10px] font-bold uppercase tracking-wider mb-1 block">{{ article.category.name }}</span>
+                        <h3 class="text-white font-bold text-lg leading-snug font-serif group-hover:text-tripura-red transition-colors">{{ article.title|truncatechars:60 }}</h3>
                     </div>
                 </a>
             </div>
             {% endfor %}
         </div>
 
-        <div class="md:col-span-3 flex flex-col gap-6">
-            <div class="ad-space w-full h-[250px] rounded-xl">
-                <span class="ad-label">ADVERTISEMENT</span>
-                Google Ad (300x250)
-            </div>
-            <div class="bg-slate-50 dark:bg-slate-900 rounded-xl p-4 border border-gray-100 dark:border-slate-800 flex-1 overflow-y-auto">
-                <h3 class="text-xs font-black uppercase text-slate-500 mb-3 tracking-widest border-b pb-2">Trending Now</h3>
-                <ul class="space-y-4">
+        <div class="md:col-span-3 flex flex-col h-full">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-100 dark:border-slate-800 shadow-sm flex-1 overflow-y-auto">
+                <h3 class="text-xs font-black uppercase text-slate-500 mb-4 tracking-[0.2em] border-b pb-2 flex items-center gap-2">
+                    <i class="ph-fill ph-trend-up text-tripura-red"></i> Trending
+                </h3>
+                <ul class="space-y-5">
                     {% for article in trending_news %}
-                    <li class="group cursor-pointer">
+                    <li class="group cursor-pointer flex gap-3 items-start">
+                        <span class="text-5xl font-black text-gray-100 dark:text-slate-800 -mt-2 leading-none group-hover:text-tripura-red/20 transition-colors select-none">{{ forloop.counter }}</span>
                         <a href="{% url 'article_detail' article.slug %}">
-                            <span class="text-tripura-red font-black text-lg float-left mr-2">{{ forloop.counter }}</span>
-                            <h4 class="text-sm font-bold leading-snug group-hover:text-tripura-red">{{ article.title }}</h4>
+                            <span class="text-[10px] font-bold text-tripura-red uppercase block mb-0.5">{{ article.category.name }}</span>
+                            <h4 class="text-sm font-bold leading-snug text-slate-800 dark:text-gray-200 group-hover:text-tripura-red transition-colors">{{ article.title }}</h4>
                         </a>
                     </li>
                     {% endfor %}
@@ -58,118 +64,100 @@
             </div>
         </div>
     </div>
-</main>
 
-<section class="bg-slate-50 dark:bg-slate-900 py-12 border-y border-gray-200 dark:border-slate-800">
-    <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+    <div class="w-full h-[120px] bg-slate-100 dark:bg-slate-900 rounded-xl border-2 border-dashed border-slate-300 dark:border-slate-800 flex flex-col items-center justify-center text-slate-400">
+        <span class="text-[10px] font-bold uppercase tracking-widest mb-1">Advertisement</span>
+        <span class="text-xs">Leaderboard (970x90)</span>
+    </div>
+
+    <section>
+        <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4 border-b border-gray-200 dark:border-slate-800 pb-4">
             <div>
-                <h2 class="section-header text-3xl font-black text-slate-900 dark:text-white">Tripura Focus</h2>
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white font-display uppercase italic tracking-tight">Tripura <span class="text-tripura-red">Focus</span></h2>
             </div>
-            <div class="flex gap-2 overflow-x-auto pb-2 w-full md:w-auto hide-scrollbar">
-                <button class="px-4 py-1 bg-tripura-red text-white text-xs font-bold rounded-full">All</button>
+            <div class="flex gap-2 overflow-x-auto pb-1 w-full md:w-auto hide-scrollbar">
+                <button class="px-5 py-1.5 bg-tripura-red text-white text-xs font-bold rounded-full shadow-md shadow-red-500/20">All</button>
                 {% for dist in districts %}
-                <button class="px-4 py-1 bg-white dark:bg-slate-800 border dark:border-slate-700 hover:border-tripura-red text-xs font-bold rounded-full whitespace-nowrap">{{ dist.name }}</button>
+                <button class="px-5 py-1.5 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 hover:border-tripura-red dark:hover:border-tripura-red text-slate-600 dark:text-slate-300 text-xs font-bold rounded-full whitespace-nowrap transition-colors">{{ dist.name }}</button>
                 {% endfor %}
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10">
                 {% for article in tripura_news %}
-                <article class="bg-white dark:bg-slate-800 rounded-xl shadow-sm hover:shadow-lg transition overflow-hidden group">
-                    <a href="{% url 'article_detail' article.slug %}">
-                        <div class="h-48 overflow-hidden relative">
+                <article class="group flex flex-col h-full">
+                    <a href="{% url 'article_detail' article.slug %}" class="block overflow-hidden rounded-xl mb-4 relative shadow-sm hover:shadow-xl transition-all duration-300">
+                        <div class="aspect-[16/10] overflow-hidden">
                             <img src="{{ article.image.url }}" class="w-full h-full object-cover transition duration-500 group-hover:scale-105" alt="{{ article.title }}">
-                            {% if article.district %}
-                            <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] px-2 py-1 rounded backdrop-blur-sm"><i class="ph-fill ph-map-pin"></i> {{ article.district.name }}</span>
-                            {% endif %}
                         </div>
-                        <div class="p-5">
-                            <div class="flex items-center gap-2 mb-2 text-[10px] font-bold uppercase text-gray-500">
-                                <span class="text-tripura-red">{{ article.category.name }}</span>
-                                <span>•</span>
-                                <span>{{ article.created_at|timesince }} ago</span>
-                            </div>
-                            <h3 class="text-lg font-bold font-serif leading-tight text-slate-900 dark:text-white group-hover:text-tripura-red transition">{{ article.title }}</h3>
-                        </div>
+                        {% if article.district %}
+                        <span class="absolute top-2 right-2 bg-black/60 text-white text-[10px] font-bold px-2 py-1 rounded backdrop-blur-sm shadow-sm"><i class="ph-fill ph-map-pin"></i> {{ article.district.name }}</span>
+                        {% endif %}
                     </a>
+                    <div class="flex-1 flex flex-col">
+                        <div class="flex items-center gap-2 text-[10px] font-bold uppercase text-gray-500 mb-2">
+                            <span class="text-tripura-red">{{ article.category.name }}</span>
+                            <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+                            <span>{{ article.created_at|date:"M j" }}</span>
+                        </div>
+                        <h3 class="text-lg font-bold font-serif leading-tight text-slate-900 dark:text-white group-hover:text-tripura-red transition mb-2">{{ article.title }}</h3>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 line-clamp-2 leading-relaxed">{{ article.subtitle }}</p>
+                    </div>
                 </article>
                 {% empty %}
-                <p class="text-gray-500 p-4">No news currently available for Tripura.</p>
+                <p class="text-gray-500">No news available.</p>
                 {% endfor %}
             </div>
 
             <div class="lg:col-span-1 space-y-8">
-                <div class="bg-blue-50 dark:bg-slate-800 p-5 rounded-xl border border-blue-100 dark:border-slate-700">
-                    <h4 class="font-bold text-blue-900 dark:text-blue-400 uppercase text-xs mb-4 flex items-center gap-2"><i class="ph-fill ph-briefcase"></i> Jobs & Careers</h4>
+                <div class="bg-blue-50 dark:bg-slate-800 p-6 rounded-2xl border border-blue-100 dark:border-slate-700">
+                    <h4 class="font-black text-blue-900 dark:text-blue-400 uppercase text-xs mb-4 flex items-center gap-2 tracking-widest"><i class="ph-fill ph-briefcase text-lg"></i> Jobs & Careers</h4>
                     <ul class="space-y-4">
-                        <li class="border-b border-blue-200 dark:border-slate-700 pb-2">
-                            <a href="#" class="block hover:text-blue-600">
-                                <h5 class="font-bold text-sm text-slate-800 dark:text-gray-200">TPSC Recruitment 2025</h5>
-                                <span class="text-[10px] text-gray-500">Last Date: Jan 30</span>
+                        <li class="border-b border-blue-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                            <a href="#" class="block group">
+                                <h5 class="font-bold text-sm text-slate-800 dark:text-gray-200 group-hover:text-blue-600 transition">TPSC Recruitment 2025</h5>
+                                <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium">Apply before Jan 30</span>
+                            </a>
+                        </li>
+                        <li class="border-b border-blue-200 dark:border-slate-700 pb-3 last:border-0 last:pb-0">
+                            <a href="#" class="block group">
+                                <h5 class="font-bold text-sm text-slate-800 dark:text-gray-200 group-hover:text-blue-600 transition">Tripura Police Constable</h5>
+                                <span class="text-[10px] text-blue-600 dark:text-blue-400 font-medium">Physical Test: Feb 05</span>
                             </a>
                         </li>
                     </ul>
                 </div>
+                
+                <div class="bg-slate-100 dark:bg-slate-900 p-8 rounded-xl text-center">
+                    <span class="text-[10px] text-gray-400 uppercase tracking-widest block mb-2">Advertisement</span>
+                    <p class="text-sm text-gray-500 font-bold">Square Ad (300x250)</p>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<div class="container mx-auto px-4 py-8">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 border-t border-gray-200 dark:border-slate-800 pt-12">
         
+        {% for section in region_sections %}
         <div>
-            <div class="flex justify-between items-center mb-4 border-b-2 border-orange-500 pb-2">
-                <h3 class="font-black text-xl uppercase">Northeast</h3>
+            <div class="flex justify-between items-center mb-6 border-b-2 border-{{ section.color }} pb-2">
+                <h3 class="font-black text-xl uppercase font-display">{{ section.title }}</h3>
             </div>
-            <div class="space-y-4">
-                {% for article in northeast_news %}
-                <a href="{% url 'article_detail' article.slug %}" class="flex gap-3 group">
-                    <img src="{{ article.image.url }}" class="w-24 h-16 object-cover rounded">
+            <div class="space-y-6">
+                {% for article in section.articles|slice:":4" %}
+                <a href="{% url 'article_detail' article.slug %}" class="flex gap-4 group items-start">
+                    <img src="{{ article.image.url }}" class="w-24 h-20 object-cover rounded-lg shrink-0 shadow-sm group-hover:shadow-md transition">
                     <div>
-                        <h4 class="font-bold text-sm leading-snug group-hover:text-orange-500 transition">{{ article.title }}</h4>
-                        <span class="text-[10px] text-gray-400">{{ article.created_at|timesince }} ago</span>
+                        <h4 class="font-bold text-sm leading-snug text-slate-800 dark:text-gray-200 group-hover:text-{{ section.color }} transition mb-1">{{ article.title }}</h4>
+                        <span class="text-[10px] text-gray-400 font-medium">{{ article.created_at|timesince }} ago</span>
                     </div>
                 </a>
                 {% endfor %}
             </div>
         </div>
+        {% endfor %}
 
-        <div>
-            <div class="flex justify-between items-center mb-4 border-b-2 border-blue-500 pb-2">
-                <h3 class="font-black text-xl uppercase">India</h3>
-            </div>
-            <div class="space-y-4">
-                {% for article in india_news %}
-                <a href="{% url 'article_detail' article.slug %}" class="flex gap-3 group">
-                    <img src="{{ article.image.url }}" class="w-24 h-16 object-cover rounded">
-                    <div>
-                        <h4 class="font-bold text-sm leading-snug group-hover:text-blue-500 transition">{{ article.title }}</h4>
-                        <span class="text-[10px] text-gray-400">{{ article.created_at|timesince }} ago</span>
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
-
-         <div>
-            <div class="flex justify-between items-center mb-4 border-b-2 border-gray-500 pb-2">
-                <h3 class="font-black text-xl uppercase">Global</h3>
-            </div>
-            <div class="space-y-4">
-                {% for article in global_news %}
-                <a href="{% url 'article_detail' article.slug %}" class="flex gap-3 group">
-                    <img src="{{ article.image.url }}" class="w-24 h-16 object-cover rounded">
-                    <div>
-                        <h4 class="font-bold text-sm leading-snug group-hover:text-gray-500 transition">{{ article.title }}</h4>
-                        <span class="text-[10px] text-gray-400">{{ article.created_at|timesince }} ago</span>
-                    </div>
-                </a>
-                {% endfor %}
-            </div>
-        </div>
     </div>
-</div>
+</main>
 {% endblock %}

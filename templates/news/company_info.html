@@ -3,73 +3,78 @@
 {% block title %}Corporate Hub | Tripura Now{% endblock %}
 
 {% block content %}
-<main class="relative min-h-screen">
+<main class="relative min-h-screen pb-24 overflow-x-hidden">
     
-    <div class="fixed inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] pointer-events-none"></div>
+    <div class="fixed top-0 left-0 w-full h-screen overflow-hidden -z-50 pointer-events-none">
+        <div class="absolute top-[10%] right-[-5%] w-[300px] md:w-[600px] h-[300px] md:h-[600px] bg-tripura-red/20 rounded-full blur-[80px] md:blur-[120px] mix-blend-screen opacity-40"></div>
+        <div class="absolute bottom-[10%] left-[-10%] w-[250px] md:w-[500px] h-[250px] md:h-[500px] bg-blue-600/10 rounded-full blur-[60px] md:blur-[100px] mix-blend-screen opacity-40"></div>
+    </div>
 
-    <div class="relative pt-32 pb-20 overflow-hidden">
+    <div class="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
         <div class="container mx-auto px-4 relative z-10">
-            <div class="flex flex-col md:flex-row items-end gap-8">
+            <div class="flex flex-col md:flex-row items-end gap-8 md:gap-12">
                 <div class="md:w-2/3">
-                    <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-tripura-red/30 bg-tripura-red/5 text-tripura-red text-[10px] font-black uppercase tracking-[0.3em] mb-6 backdrop-blur-md">
-                        <span class="w-1.5 h-1.5 rounded-full bg-tripura-red animate-pulse"></span> Corporate Hub
-                    </span>
-                    <h1 class="text-7xl md:text-9xl font-black text-slate-900 dark:text-white font-display uppercase italic tracking-tighter leading-[0.85]">
-                        .... <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-tripura-red via-red-500 to-orange-500">Unfiltered....</span>
+                    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-tripura-red/30 bg-tripura-red/10 text-tripura-red text-[10px] font-black uppercase tracking-[0.3em] mb-6 md:mb-8 backdrop-blur-md shadow-lg shadow-tripura-red/10">
+                        <span class="w-1.5 h-1.5 rounded-full bg-tripura-red animate-pulse"></span> 
+                        Corporate Hub
+                    </div>
+                    <h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-slate-900 dark:text-white font-display uppercase italic tracking-tighter leading-[0.9] md:leading-[0.85] drop-shadow-sm">
+                        Total <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-tripura-red via-red-500 to-orange-500">Transparency</span>
                     </h1>
                 </div>
-                <div class="md:w-1/3 pb-2">
-                    <p class="text-lg text-slate-500 dark:text-slate-400 font-serif leading-relaxed">
-                        The definitive digital voice of the Northeast. We bridge the gap between tradition and the future of journalism.
-                    </p>
+                <div class="md:w-1/3 pb-2 md:pb-4">
+                    <div class="pl-6 border-l-4 border-tripura-red">
+                        <p class="text-base md:text-lg text-slate-600 dark:text-slate-300 font-serif leading-relaxed">
+                            The definitive digital voice of the Northeast. We bridge the gap between tradition and the future of journalism.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
-        
-        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-b from-tripura-red/5 to-transparent rounded-full blur-3xl -z-10"></div>
     </div>
 
-    <div class="container mx-auto px-4 pb-32">
-        <div class="flex flex-col lg:flex-row gap-16">
+    <div class="container mx-auto px-4">
+        <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
             
             <aside class="lg:w-1/4 hidden lg:block">
-                <div class="sticky top-32">
-                    <div class="bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl rounded-[2rem] p-2 border border-white/20 shadow-2xl ring-1 ring-black/5">
-                        <nav class="flex flex-col gap-1">
-                            <a href="#about" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300">
-                                <span class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-tripura-red group-hover:text-white transition-colors">
-                                    <i class="ph-bold ph-users"></i>
+                <div class="sticky top-28 space-y-8">
+                    <div class="bg-white/60 dark:bg-black/40 backdrop-blur-xl rounded-[2rem] p-3 border border-slate-200 dark:border-white/5 shadow-2xl ring-1 ring-white/10">
+                        <nav class="flex flex-col gap-2">
+                            <a href="#about" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300 border border-transparent hover:border-slate-100 dark:hover:border-white/5">
+                                <span class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-tripura-red group-hover:text-white transition-colors">
+                                    <i class="ph-bold ph-users text-lg"></i>
                                 </span>
                                 <div>
-                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">About</span>
-                                    <span class="block text-[9px] text-slate-400 group-hover:text-tripura-red">Our Mission</span>
+                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white group-hover:translate-x-1 transition-transform">About</span>
+                                    <span class="block text-[9px] text-slate-400 font-bold uppercase tracking-wide">Our Mission</span>
                                 </div>
                             </a>
-                            <a href="#advertise" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300">
-                                <span class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-tripura-red group-hover:text-white transition-colors">
-                                    <i class="ph-bold ph-trend-up"></i>
+                            <a href="#advertise" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300 border border-transparent hover:border-slate-100 dark:hover:border-white/5">
+                                <span class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-tripura-red group-hover:text-white transition-colors">
+                                    <i class="ph-bold ph-trend-up text-lg"></i>
                                 </span>
                                 <div>
-                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Advertise</span>
-                                    <span class="block text-[9px] text-slate-400 group-hover:text-tripura-red">Grow With Us</span>
+                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white group-hover:translate-x-1 transition-transform">Advertise</span>
+                                    <span class="block text-[9px] text-slate-400 font-bold uppercase tracking-wide">Grow With Us</span>
                                 </div>
                             </a>
-                            <a href="#contact" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300">
-                                <span class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-tripura-red group-hover:text-white transition-colors">
-                                    <i class="ph-bold ph-chat-circle-dots"></i>
+                            <a href="#contact" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300 border border-transparent hover:border-slate-100 dark:hover:border-white/5">
+                                <span class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-tripura-red group-hover:text-white transition-colors">
+                                    <i class="ph-bold ph-chat-circle-dots text-lg"></i>
                                 </span>
                                 <div>
-                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Contact</span>
-                                    <span class="block text-[9px] text-slate-400 group-hover:text-tripura-red">Get in Touch</span>
+                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white group-hover:translate-x-1 transition-transform">Contact</span>
+                                    <span class="block text-[9px] text-slate-400 font-bold uppercase tracking-wide">Get in Touch</span>
                                 </div>
                             </a>
-                             <a href="#legal" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300">
-                                <span class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-500 group-hover:bg-tripura-red group-hover:text-white transition-colors">
-                                    <i class="ph-bold ph-scales"></i>
+                             <a href="#legal" class="group flex items-center gap-4 p-4 rounded-2xl hover:bg-white dark:hover:bg-white/10 transition-all duration-300 border border-transparent hover:border-slate-100 dark:hover:border-white/5">
+                                <span class="w-10 h-10 rounded-full bg-slate-100 dark:bg-white/5 flex items-center justify-center text-slate-400 group-hover:bg-tripura-red group-hover:text-white transition-colors">
+                                    <i class="ph-bold ph-scales text-lg"></i>
                                 </span>
                                 <div>
-                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Legal</span>
-                                    <span class="block text-[9px] text-slate-400 group-hover:text-tripura-red">Privacy & Terms</span>
+                                    <span class="block text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white group-hover:translate-x-1 transition-transform">Legal</span>
+                                    <span class="block text-[9px] text-slate-400 font-bold uppercase tracking-wide">Privacy & Terms</span>
                                 </div>
                             </a>
                         </nav>
@@ -77,80 +82,92 @@
                 </div>
             </aside>
 
-            <div class="lg:w-3/4 space-y-32">
+            <div class="lg:w-3/4 space-y-20 lg:space-y-32">
 
                 <section id="about" class="scroll-mt-32">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-slate-900 text-white p-10 rounded-[2.5rem] relative overflow-hidden md:col-span-2 shadow-2xl">
-                            <div class="absolute top-0 right-0 w-64 h-64 bg-tripura-red rounded-full blur-[100px] opacity-40"></div>
-                            <h2 class="text-4xl font-black font-display italic uppercase mb-6 relative z-10">We Are The<br>New Standard.</h2>
-                            <p class="text-slate-300 text-lg font-serif max-w-2xl relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+                        <div class="bg-slate-900 dark:bg-black/60 backdrop-blur-xl text-white p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden md:col-span-2 shadow-2xl border border-white/10">
+                            <div class="absolute top-0 right-0 w-48 md:w-64 h-48 md:h-64 bg-tripura-red rounded-full blur-[80px] md:blur-[100px] opacity-40 animate-pulse"></div>
+                            <h2 class="text-3xl md:text-5xl font-black font-display italic uppercase mb-6 relative z-10 tracking-tight">
+                                We Are The<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-tripura-red to-orange-500">New Standard.</span>
+                            </h2>
+                            <p class="text-slate-300 text-base md:text-lg font-serif max-w-2xl relative z-10 leading-relaxed">
                                 Founded in 2024, Tripura Now was born from a simple idea: News should be fast, accurate, and beautiful. We are a team of data journalists and storytellers redefining media in the Northeast.
                             </p>
                         </div>
                         
-                        <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-8 rounded-[2.5rem] flex flex-col justify-between hover:border-tripura-red transition-colors group">
-                            <div class="w-12 h-12 bg-tripura-red/10 rounded-full flex items-center justify-center text-tripura-red mb-4 group-hover:scale-110 transition-transform"><i class="ph-fill ph-users text-2xl"></i></div>
+                        <div class="bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 p-8 md:p-10 rounded-[2.5rem] flex flex-col justify-between hover:border-tripura-red/50 transition-all duration-500 group shadow-lg">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-tripura-red/10 rounded-2xl flex items-center justify-center text-tripura-red mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform shadow-inner">
+                                <i class="ph-fill ph-users text-2xl"></i>
+                            </div>
                             <div>
-                                <span class="block text-4xl font-black text-slate-900 dark:text-white mb-1">2.5M+</span>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Monthly Readers</span>
+                                <span class="block text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2 font-display italic">2.5M+</span>
+                                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Monthly Readers</span>
                             </div>
                         </div>
 
-                        <div class="bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 p-8 rounded-[2.5rem] flex flex-col justify-between hover:border-tripura-red transition-colors group">
-                            <div class="w-12 h-12 bg-blue-500/10 rounded-full flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform"><i class="ph-fill ph-article text-2xl"></i></div>
+                        <div class="bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 p-8 md:p-10 rounded-[2.5rem] flex flex-col justify-between hover:border-blue-500/50 transition-all duration-500 group shadow-lg">
+                            <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center text-blue-500 mb-6 group-hover:scale-110 group-hover:-rotate-3 transition-transform shadow-inner">
+                                <i class="ph-fill ph-article text-2xl"></i>
+                            </div>
                             <div>
-                                <span class="block text-4xl font-black text-slate-900 dark:text-white mb-1">150+</span>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Daily Stories</span>
+                                <span class="block text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2 font-display italic">150+</span>
+                                <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Daily Stories</span>
                             </div>
                         </div>
 
-                        <div class="md:col-span-2 bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-[2.5rem] p-4 flex items-center justify-between">
+                        <div class="md:col-span-2 bg-slate-50/80 dark:bg-white/5 backdrop-blur border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-6 flex items-center justify-between shadow-sm">
                             <div class="flex -space-x-4 pl-4">
-                                <img src="https://ui-avatars.com/api/?name=Arjun+Deb&background=random" class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900">
-                                <img src="https://ui-avatars.com/api/?name=Sarah+Li&background=random" class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900">
-                                <img src="https://ui-avatars.com/api/?name=Vikram+S&background=random" class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900">
-                                <div class="w-12 h-12 rounded-full border-2 border-white dark:border-slate-900 bg-slate-900 text-white flex items-center justify-center text-xs font-bold">+12</div>
+                                <img src="https://ui-avatars.com/api/?name=Arjun+Deb&background=random" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white dark:border-slate-900 grayscale group-hover:grayscale-0 transition-all shadow-md">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Li&background=random" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white dark:border-slate-900 grayscale group-hover:grayscale-0 transition-all shadow-md">
+                                <img src="https://ui-avatars.com/api/?name=Vikram+S&background=random" class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white dark:border-slate-900 grayscale group-hover:grayscale-0 transition-all shadow-md">
+                                <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white dark:border-slate-900 bg-slate-900 text-white flex items-center justify-center text-[10px] md:text-xs font-bold shadow-md">+12</div>
                             </div>
-                            <div class="pr-6 text-right">
-                                <span class="block text-xs font-black uppercase text-slate-900 dark:text-white">Our Editorial Team</span>
-                                <span class="text-[9px] font-bold text-slate-400">Agartala HQ</span>
+                            <div class="pr-2 md:pr-6 text-right">
+                                <span class="block text-[10px] md:text-xs font-black uppercase text-slate-900 dark:text-white tracking-widest">Our Team</span>
+                                <span class="text-[9px] font-bold text-slate-400 uppercase tracking-wide hidden sm:inline">Agartala HQ</span>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <section id="advertise" class="scroll-mt-32">
-                    <div class="relative bg-black rounded-[3rem] p-10 md:p-16 overflow-hidden shadow-2xl group">
-                        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-tripura-red/20 to-transparent rounded-full blur-[120px] mix-blend-screen"></div>
+                    <div class="relative bg-black rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-16 overflow-hidden shadow-2xl group border border-white/10">
+                        <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-b from-tripura-red/30 to-transparent rounded-full blur-[120px] mix-blend-screen opacity-50 group-hover:opacity-70 transition-opacity duration-1000"></div>
                         
-                        <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
+                        <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-12 md:mb-16">
                             <div>
-                                <h2 class="text-5xl font-black font-display italic uppercase text-white mb-4">Advertise<br><span class="text-slate-500">With Impact</span></h2>
-                                <p class="text-slate-400 max-w-sm">Reach the most engaged audience in the Northeast with our premium, high-viewability ad slots.</p>
+                                <span class="inline-block px-3 py-1 bg-white/10 rounded-lg text-[9px] font-black text-white uppercase tracking-[0.2em] mb-6 backdrop-blur border border-white/10">Partnership</span>
+                                <h2 class="text-4xl md:text-5xl font-black font-display italic uppercase text-white mb-4 leading-none">Advertise<br><span class="text-slate-500">With Impact</span></h2>
+                                <p class="text-slate-400 max-w-sm font-medium leading-relaxed text-sm md:text-base">Reach the most engaged audience in the Northeast with our premium, high-viewability ad slots.</p>
                             </div>
-                            <button class="bg-white text-black px-8 py-4 rounded-full font-black uppercase tracking-widest text-xs hover:bg-tripura-red hover:text-white transition-all hover:scale-105">
+                            <button class="bg-white text-black w-full md:w-auto px-8 py-4 rounded-full font-black uppercase tracking-[0.2em] text-xs hover:bg-tripura-red hover:text-white transition-all hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                                 Download Media Kit
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all cursor-pointer">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all cursor-pointer backdrop-blur-sm group/slot">
                                 <div class="flex justify-between items-center mb-6">
-                                    <span class="text-white font-black uppercase tracking-widest text-sm">Billboard</span>
-                                    <span class="text-[10px] bg-tripura-red text-white px-2 py-1 rounded">HOT</span>
+                                    <span class="text-white font-black uppercase tracking-widest text-xs flex items-center gap-2">
+                                        <i class="ph-bold ph-monitor"></i> Billboard
+                                    </span>
+                                    <span class="text-[9px] font-black bg-tripura-red text-white px-2 py-1 rounded shadow-lg shadow-tripura-red/20">HOT</span>
                                 </div>
-                                <div class="w-full aspect-[4/1] bg-white/5 rounded-xl border border-dashed border-white/20 flex items-center justify-center">
-                                    <span class="text-[10px] uppercase text-white/30">970x250px</span>
+                                <div class="w-full aspect-[4/1] bg-black/40 rounded-xl border border-dashed border-white/20 flex items-center justify-center group-hover/slot:border-tripura-red/50 transition-colors">
+                                    <span class="text-[10px] uppercase font-black text-white/30 tracking-widest">970x250px</span>
                                 </div>
                             </div>
-                            <div class="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all cursor-pointer">
+                            
+                            <div class="bg-white/5 border border-white/10 rounded-3xl p-6 hover:bg-white/10 transition-all cursor-pointer backdrop-blur-sm group/slot">
                                 <div class="flex justify-between items-center mb-6">
-                                    <span class="text-white font-black uppercase tracking-widest text-sm">Skyscraper</span>
-                                    <span class="text-[10px] bg-blue-500 text-white px-2 py-1 rounded">STICKY</span>
+                                    <span class="text-white font-black uppercase tracking-widest text-xs flex items-center gap-2">
+                                        <i class="ph-bold ph-columns"></i> Skyscraper
+                                    </span>
+                                    <span class="text-[9px] font-black bg-blue-500 text-white px-2 py-1 rounded shadow-lg shadow-blue-500/20">STICKY</span>
                                 </div>
-                                <div class="w-1/2 mx-auto aspect-[1/2] bg-white/5 rounded-xl border border-dashed border-white/20 flex items-center justify-center">
-                                    <span class="text-[10px] uppercase text-white/30">300x600px</span>
+                                <div class="w-1/2 mx-auto aspect-[1/2] bg-black/40 rounded-xl border border-dashed border-white/20 flex items-center justify-center group-hover/slot:border-blue-500/50 transition-colors">
+                                    <span class="text-[10px] uppercase font-black text-white/30 tracking-widest rotate-90">300x600px</span>
                                 </div>
                             </div>
                         </div>
@@ -158,45 +175,52 @@
                 </section>
 
                 <section id="contact" class="scroll-mt-32">
-                    <div class="flex flex-col md:flex-row gap-6">
-                        <div class="md:w-1/3 bg-tripura-red text-white p-10 rounded-[2.5rem] flex flex-col justify-between shadow-xl">
-                            <div>
-                                <span class="opacity-50 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block">Contact</span>
+                    <div class="flex flex-col md:flex-row gap-8">
+                        <div class="md:w-1/3 bg-tripura-red text-white p-8 md:p-10 rounded-[2.5rem] flex flex-col justify-between shadow-2xl shadow-tripura-red/20 relative overflow-hidden">
+                            <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none"></div>
+                            <div class="mb-8">
+                                <span class="opacity-70 text-[10px] font-black uppercase tracking-[0.3em] mb-8 block border-b border-white/20 pb-4">Contact</span>
                                 <h2 class="text-4xl font-black font-display italic uppercase mb-2">Let's<br>Talk.</h2>
                             </div>
-                            <div class="space-y-6">
-                                <div>
-                                    <span class="block text-[10px] font-bold uppercase opacity-60">Email</span>
-                                    <a href="mailto:editor@tripuranow.com" class="text-lg font-bold hover:underline">editor@tripuranow.com</a>
+                            <div class="space-y-8 relative z-10">
+                                <div class="group/link cursor-pointer">
+                                    <span class="block text-[9px] font-bold uppercase opacity-60 mb-1">Email</span>
+                                    <a href="mailto:editor@tripuranow.com" class="text-base md:text-lg font-bold group-hover/link:underline decoration-2 underline-offset-4 break-all">editor@tripuranow.com</a>
                                 </div>
                                 <div>
-                                    <span class="block text-[10px] font-bold uppercase opacity-60">Office</span>
-                                    <p class="text-lg font-bold leading-tight">Agartala, Tripura (W)<br>Pin - 799001</p>
+                                    <span class="block text-[9px] font-bold uppercase opacity-60 mb-1">Office</span>
+                                    <p class="text-base md:text-lg font-bold leading-tight">Agartala, Tripura (W)<br>Pin - 799001</p>
+                                </div>
+                                <div class="flex gap-4 pt-4 border-t border-white/20">
+                                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white hover:text-tripura-red transition-all"><i class="ph-fill ph-facebook-logo"></i></a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white hover:text-tripura-red transition-all"><i class="ph-fill ph-twitter-logo"></i></a>
+                                    <a href="#" class="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center hover:bg-white hover:text-tripura-red transition-all"><i class="ph-fill ph-linkedin-logo"></i></a>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="md:w-2/3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 p-10 rounded-[2.5rem] shadow-lg">
+                        <div class="md:w-2/3 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 p-8 md:p-10 rounded-[2.5rem] shadow-xl">
                             <form class="space-y-6">
-                                <div class="grid grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div class="space-y-2">
-                                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Name</label>
-                                        <input type="text" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-tripura-red transition-colors dark:text-white">
+                                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-2">Name</label>
+                                        <input type="text" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-6 py-4 font-bold text-sm focus:outline-none focus:border-tripura-red focus:ring-1 focus:ring-tripura-red transition-all dark:text-white placeholder:text-slate-400" placeholder="John Doe">
                                     </div>
                                     <div class="space-y-2">
-                                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Subject</label>
-                                        <select class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-tripura-red transition-colors dark:text-white">
+                                        <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-2">Subject</label>
+                                        <select class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-6 py-4 font-bold text-sm focus:outline-none focus:border-tripura-red focus:ring-1 focus:ring-tripura-red transition-all dark:text-white cursor-pointer appearance-none">
                                             <option>General Inquiry</option>
                                             <option>Advertising</option>
                                             <option>Correction</option>
+                                            <option>Tip Off</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="space-y-2">
-                                    <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest">Message</label>
-                                    <textarea rows="4" class="w-full bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-xl px-4 py-3 font-bold text-sm focus:outline-none focus:border-tripura-red transition-colors dark:text-white"></textarea>
+                                    <label class="text-[10px] font-black uppercase text-slate-400 tracking-widest pl-2">Message</label>
+                                    <textarea rows="5" class="w-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-2xl px-6 py-4 font-bold text-sm focus:outline-none focus:border-tripura-red focus:ring-1 focus:ring-tripura-red transition-all dark:text-white placeholder:text-slate-400" placeholder="How can we help you?"></textarea>
                                 </div>
-                                <button class="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-black font-black uppercase tracking-[0.2em] rounded-xl hover:bg-tripura-red hover:text-white transition-all shadow-lg">
+                                <button class="w-full py-4 bg-slate-900 dark:bg-white text-white dark:text-black font-black uppercase tracking-[0.2em] rounded-2xl hover:bg-tripura-red hover:text-white dark:hover:bg-tripura-red dark:hover:text-white transition-all shadow-lg hover:shadow-tripura-red/20 transform hover:-translate-y-1">
                                     Send Message
                                 </button>
                             </form>
@@ -205,24 +229,30 @@
                 </section>
 
                 <section id="legal" class="scroll-mt-32">
-                    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-10 shadow-sm">
-                        <div class="flex items-center justify-between mb-8">
-                            <h2 class="text-2xl font-black font-display italic uppercase text-slate-900 dark:text-white">Legal & Privacy</h2>
-                            <span class="text-[10px] text-slate-400 font-bold uppercase">Updated Dec 2025</span>
+                    <div class="bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-slate-200 dark:border-white/5 rounded-[2.5rem] p-8 md:p-10 shadow-sm hover:border-slate-300 dark:hover:border-white/10 transition-colors">
+                        <div class="flex items-center justify-between mb-8 border-b border-slate-200 dark:border-white/10 pb-6">
+                            <h2 class="text-xl md:text-2xl font-black font-display italic uppercase text-slate-900 dark:text-white">Legal & Privacy</h2>
+                            <span class="text-[9px] md:text-[10px] text-slate-400 font-black uppercase tracking-widest bg-slate-100 dark:bg-white/5 px-3 py-1 rounded-full">Updated Dec 2025</span>
                         </div>
                         
-                        <div class="space-y-8 divide-y divide-slate-100 dark:divide-white/5">
-                            <div class="pt-4">
-                                <h3 class="font-bold text-slate-900 dark:text-white mb-2">Data Protection</h3>
-                                <p class="text-sm text-slate-500 leading-relaxed">We utilize industry-standard encryption to protect your data. Cookies are used solely for analytics and user preference retention (like Dark Mode settings).</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div>
+                                <h3 class="font-black text-xs uppercase tracking-widest text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                                    <i class="ph-bold ph-shield-check text-tripura-red"></i> Data Protection
+                                </h3>
+                                <p class="text-xs text-slate-500 leading-relaxed font-medium">We utilize industry-standard encryption. Cookies are used solely for analytics and user preference retention (like Dark Mode settings).</p>
                             </div>
-                            <div class="pt-8">
-                                <h3 class="font-bold text-slate-900 dark:text-white mb-2">Content Usage</h3>
-                                <p class="text-sm text-slate-500 leading-relaxed">All content on Tripura Now is protected by copyright. Reproduction without explicit written permission is prohibited.</p>
+                            <div>
+                                <h3 class="font-black text-xs uppercase tracking-widest text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                                    <i class="ph-bold ph-copyright text-tripura-red"></i> Content Usage
+                                </h3>
+                                <p class="text-xs text-slate-500 leading-relaxed font-medium">All content on Tripura Now is protected by copyright. Reproduction without explicit written permission is prohibited.</p>
                             </div>
-                             <div class="pt-8">
-                                <h3 class="font-bold text-slate-900 dark:text-white mb-2">Corrections Policy</h3>
-                                <p class="text-sm text-slate-500 leading-relaxed">We are committed to transparency. If an error is found in our reporting, we will correct it immediately and note the correction at the bottom of the article.</p>
+                             <div>
+                                <h3 class="font-black text-xs uppercase tracking-widest text-slate-900 dark:text-white mb-3 flex items-center gap-2">
+                                    <i class="ph-bold ph-warning-circle text-tripura-red"></i> Corrections
+                                </h3>
+                                <p class="text-xs text-slate-500 leading-relaxed font-medium">We are committed to transparency. Errors are corrected immediately with a note at the bottom of the article.</p>
                             </div>
                         </div>
                     </div>

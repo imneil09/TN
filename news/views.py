@@ -10,16 +10,17 @@ def get_common_context():
 def home(request):
     context = get_common_context()
     
-    # 1. Hero Section
+    # 1. Hero Section (The big main article)
     hero_article = Article.objects.filter(is_hero=True).order_by('-created_at').first()
     
     # Exclude hero from other lists to avoid duplication
     exclude_ids = [hero_article.id] if hero_article else []
     
+    # Sub-hero articles (next to the main one)
     sub_hero_articles = Article.objects.exclude(id__in=exclude_ids).order_by('-created_at')[:3]
     exclude_ids += [a.id for a in sub_hero_articles] # Update exclusion list
     
-    # 2. Trending (Added this for your sidebar)
+    # 2. Trending (For the sidebar)
     trending_news = Article.objects.filter(is_trending=True).exclude(id__in=exclude_ids)[:5]
 
     # 3. Categorized News
@@ -31,26 +32,26 @@ def home(request):
     context.update({
         'hero_article': hero_article,
         'sub_hero_articles': sub_hero_articles,
-        'trending_news': trending_news, # Pass this to template
+        'trending_news': trending_news, 
         'tripura_news': tripura_news,
-        'districts': District.objects.all(),
+        'districts': District.objects.all(), # For the filter buttons
         'northeast_news': northeast_news,
         'india_news': india_news,
         'global_news': global_news,
     })
-    # Note: Changed 'index.html' to match standard naming, make sure to create the file below
+    
     return render(request, 'news/index.html', context)
 
 def article_detail(request, slug):
     context = get_common_context()
     article = get_object_or_404(Article, slug=slug)
+    # Get 3 other articles from the same category
     related_news = Article.objects.filter(category=article.category).exclude(id=article.id)[:3]
     
     context.update({
         'article': article,
         'related_news': related_news
     })
-    # Note: Changed 'detail.html' to match standard naming, make sure to create the file below
     return render(request, 'news/detail.html', context)
 
 def category_detail(request, slug):

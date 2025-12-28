@@ -96,7 +96,7 @@
                     </a>
                 </article>
                 {% empty %}
-                <p>No news currently available for Tripura.</p>
+                <p class="text-gray-500 p-4">No news currently available for Tripura.</p>
                 {% endfor %}
             </div>
 
@@ -119,8 +119,6 @@
 
 <div class="container mx-auto px-4 py-8">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {% for region_name, region_articles, color in region_data %}
-            {% endfor %}
         
         <div>
             <div class="flex justify-between items-center mb-4 border-b-2 border-orange-500 pb-2">

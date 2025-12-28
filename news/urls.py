@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
 
-# app_name = 'news'  # NOTE: Keep this commented out unless you update your templates to use 'news:home'
+# Note: app_name is disabled because templates use global names (e.g. 'home' instead of 'news:home')
+# app_name = 'news' 
 
 urlpatterns = [
     path('', views.home, name='home'),

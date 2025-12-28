@@ -1,8 +1,11 @@
 import os
 from pathlib import Path
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'django-insecure-1g^&i5nluj#jqe1+insamje+!ltu7j7ce#an0$i$@jcq5h5i7r'
+
+# Quick-start development settings - unsuitable for production
+SECRET_KEY = 'django-insecure-your-secret-key-here'
 DEBUG = True
 ALLOWED_HOSTS = []
 
@@ -13,7 +16,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news', # Your App
+    'news',  # Your App
 ]
 
 MIDDLEWARE = [
@@ -31,7 +34,7 @@ ROOT_URLCONF = 'tripuranow.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'], # Point to templates folder
+        'DIRS': [BASE_DIR / 'templates'], # Points to your root 'templates' folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,10 +68,11 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = 'static/'
-# This tells Django where to find your custom.css
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
+# Media files (User uploaded images)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

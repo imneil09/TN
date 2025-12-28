@@ -9,6 +9,7 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Merriweather:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+    
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -54,10 +55,10 @@
         <nav class="hidden md:block border-t border-gray-100 dark:border-slate-800 py-3">
             <ul class="flex justify-center gap-8 text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-slate-400">
                 <li><a href="{% url 'home' %}" class="hover:text-tripura-red">Home</a></li>
-                <li><a href="/category/tripura/" class="hover:text-tripura-red">Tripura</a></li>
-                <li><a href="/category/northeast/" class="hover:text-tripura-red">Northeast</a></li>
-                <li><a href="/category/india/" class="hover:text-tripura-red">India</a></li>
-                <li><a href="/category/global/" class="hover:text-tripura-red">Global</a></li>
+                <li><a href="{% url 'category_detail' 'tripura' %}" class="hover:text-tripura-red">Tripura</a></li>
+                <li><a href="{% url 'category_detail' 'northeast' %}" class="hover:text-tripura-red">Northeast</a></li>
+                <li><a href="{% url 'category_detail' 'india' %}" class="hover:text-tripura-red">India</a></li>
+                <li><a href="{% url 'category_detail' 'global' %}" class="hover:text-tripura-red">Global</a></li>
             </ul>
         </nav>
     </header>

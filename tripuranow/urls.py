@@ -10,6 +10,5 @@ urlpatterns = [
     path('article/<slug:slug>/', views.article_detail, name='article_detail'),
 ]
 
-# This is required to serve images uploaded by the user during development
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

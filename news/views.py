@@ -2,24 +2,21 @@ from django.shortcuts import render, get_object_or_404
 from .models import Article, Category, District
 
 def home(request):
-    # 1. Breaking News Ticker
+    # 1. Breaking News
     breaking_news = Article.objects.filter(is_breaking=True).order_by('-created_at')[:5]
     
-    # 2. Hero Section (The big grid)
-    # We try to get one designated hero, or fallback to the latest post
+    # 2. Hero Section
     hero_article = Article.objects.filter(is_hero=True).order_by('-created_at').first()
     if not hero_article:
         hero_article = Article.objects.first()
         
-    # Get 3 other sub-hero articles excluding the main hero
+    # 3. Sub-hero articles
     sub_hero_articles = Article.objects.exclude(id=hero_article.id if hero_article else 0).order_by('-created_at')[:3]
     
-    # 3. Tripura Focus (Filtered by Category 'Tripura')
-    # We fetch all Tripura news
+    # 4. Filtered News
     tripura_news = Article.objects.filter(category__name__iexact='Tripura').order_by('-created_at')[:6]
-    districts = District.objects.all() # For the filter buttons
+    districts = District.objects.all()
     
-    # 4. Regional Sections
     northeast_news = Article.objects.filter(category__name__iexact='Northeast')[:5]
     india_news = Article.objects.filter(category__name__iexact='India')[:5]
     global_news = Article.objects.filter(category__name__iexact='Global')[:5]
@@ -38,7 +35,6 @@ def home(request):
 
 def article_detail(request, slug):
     article = get_object_or_404(Article, slug=slug)
-    # Simple "Related News" logic
     related_news = Article.objects.filter(category=article.category).exclude(id=article.id)[:3]
     
     context = {

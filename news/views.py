@@ -145,3 +145,6 @@ def category_detail(request, slug):
         'articles': articles,
     })
     return render(request, 'news/category.html', context)
+
+def company_info(request):
+    return render(request, 'news/company_info.html')

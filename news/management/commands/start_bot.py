@@ -7,10 +7,10 @@ from django.core.management.base import BaseCommand
 from news.models import Article 
 
 class Command(BaseCommand):
-    help = 'Starts RaShi AI with Ultimate Priority Mode'
+    help = 'Starts RraSHI AI with Ultimate Priority Mode'
 
     def handle(self, *args, **options):
-        self.stdout.write(self.style.SUCCESS("🚀 RaShi AI Ultimate Auto-Pilot Started"))
+        self.stdout.write(self.style.SUCCESS("🚀 RraSHI AI Ultimate Auto-Pilot Started"))
         self.stdout.write("Strategy: 50% Tripura | 20% NE | 15% India | 10% Global | 5% Others")
 
         # MASTER TOPIC DATABASE
@@ -79,7 +79,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.MIGRATE_HEADING(f"\n--- 🎯 SELECTED: {chosen_category} ({candidate_topic}) ---"))
             
             try:
-                call_command('run_rashi', topic=candidate_topic)
+                call_command('run_RraSHI', topic=candidate_topic)
                 
                 # Sleep between 20 to 40 minutes
                 wait_minutes = random.randint(20, 40)

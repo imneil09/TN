@@ -1,13 +1,13 @@
 import requests
 import json
-import google.generativeai as genai
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from duckduckgo_search import DDGS
 from news.models import Article, Category, District
+from google import genai 
 
-# !!! PASTE YOUR API KEY HERE !!!
-GEMINI_API_KEY = "YOUR_GEMINI_API_KEY_HERE" 
+# Your official API Key
+GEMINI_API_KEY = "AIzaSyBrs3OFHheLrDPdQXX8AL6P0YUrEVas8lA" 
 
 class Command(BaseCommand):
     help = 'Worker script that fetches and writes the news article.'
@@ -19,11 +19,20 @@ class Command(BaseCommand):
         topic = options['topic']
         self.stdout.write(f"🔍 Worker Searching: {topic}...")
 
-        # Search for latest news
-        results = DDGS().text(f"{topic} latest news", max_results=5)
+        # --- SAFETY NET FOR DUCKDUCKGO RATE LIMITS ---
+        try:
+            results = DDGS().text(f"{topic} latest news", max_results=5)
+            # Convert generator to list to check if DuckDuckGo blocked us
+            results = list(results)
+            if not results:
+                self.stdout.write(self.style.WARNING("   ⚠️ No search results found (DuckDuckGo Rate Limit). Skipping cycle."))
+                return
+        except Exception as e:
+            self.stdout.write(self.style.WARNING(f"   ⚠️ Search Engine Error: {e}. Skipping cycle."))
+            return
         
-        genai.configure(api_key=GEMINI_API_KEY)
-        model = genai.GenerativeModel('gemini-pro')
+        # Initialize the NEW Gemini Client
+        client = genai.Client(api_key=GEMINI_API_KEY)
 
         processed_count = 0
         
@@ -55,10 +64,10 @@ class Command(BaseCommand):
                 continue
 
             # 3. AI Writing
-            self.stdout.write("   🤖 RaShi AI is writing...")
+            self.stdout.write("   🤖 RraSHI AI is writing...")
             
             prompt = f"""
-            You are "RaShi AI", a senior editor for "Tripura Now".
+            You are "RraSHI AI", a senior editor for "Tripura Now".
             Rewrite the text below into a professional news article.
 
             RULES:
@@ -71,20 +80,36 @@ class Command(BaseCommand):
             """
             
             try:
-                response = model.generate_content(prompt)
-                clean_json = response.text.replace('```json', '').replace('```', '')
-                data = json.loads(clean_json)
+                # NEW Gemini API Call Syntax (Using 2.5 Flash for speed and accuracy)
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt
+                )
+                
+                # Clean up the JSON if Gemini adds Markdown formatting
+                clean_json = response.text.strip()
+                if clean_json.startswith('```json'):
+                    clean_json = clean_json[7:]
+                if clean_json.endswith('```'):
+                    clean_json = clean_json[:-3]
+                    
+                data = json.loads(clean_json.strip())
                 
                 # Pass the extracted image URL to save_article
                 self.save_article(data, url, extracted_image_url)
-                self.stdout.write(self.style.SUCCESS(f"   ✅ Published: {data['title']}"))
+                self.stdout.write(self.style.SUCCESS(f"   ✅ Published by RraSHI AI: {data['title']}"))
                 processed_count += 1
 
             except Exception as e:
                 self.stdout.write(self.style.ERROR(f"   ❌ AI/Save Error: {e}"))
 
     def fetch_page_content(self, url):
-        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
+        # Adding a more robust User-Agent to avoid getting blocked by news sites
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Referer': 'https://www.google.com/'
+        }
         try:
             resp = requests.get(url, headers=headers, timeout=10)
             soup = BeautifulSoup(resp.content, 'html.parser')
@@ -136,6 +161,7 @@ class Command(BaseCommand):
             district=district_obj,
             source_url=source_url,
             image_url=final_image,
+            author="RraSHI AI", 
             is_breaking=True,
             is_trending=True
         )

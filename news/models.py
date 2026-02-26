@@ -43,7 +43,7 @@ class Article(models.Model):
     # Stores the real image URL found by the AI
     image_url = models.URLField(max_length=1000, blank=True, null=True)
     
-    author = models.CharField(max_length=100, default="RaShi AI")
+    author = models.CharField(max_length=100, default="RraSHI AI")
     created_at = models.DateTimeField(auto_now_add=True)
     
     # --- Flags ---

@@ -1,8 +1,8 @@
 import requests
 import json
+import urllib.parse
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
-from duckduckgo_search import DDGS
 from news.models import Article, Category, District
 from google import genai 
 
@@ -17,16 +17,32 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         topic = options['topic']
-        self.stdout.write(f"🔍 Worker Searching: {topic}...")
+        self.stdout.write(f"🔍 Worker Searching on Google News: {topic}...")
 
-        # --- SAFETY NET FOR DUCKDUCKGO RATE LIMITS ---
+        # --- BULLETPROOF GOOGLE NEWS RSS SCRAPER ---
         try:
-            results = DDGS().text(f"{topic} latest news", max_results=5)
-            # Convert generator to list to check if DuckDuckGo blocked us
-            results = list(results)
-            if not results:
-                self.stdout.write(self.style.WARNING("   ⚠️ No search results found (DuckDuckGo Rate Limit). Skipping cycle."))
+            # Safely format the search topic for a URL
+            query = urllib.parse.quote(f"{topic}")
+            
+            # Fetching India-specific English news from the last 24 hours
+            url = f"https://news.google.com/rss/search?q={query}+when:1d&hl=en-IN&gl=IN&ceid=IN:en"
+            
+            resp = requests.get(url, timeout=10)
+            soup = BeautifulSoup(resp.content, 'html.parser')
+            items = soup.find_all('item')
+
+            if not items:
+                self.stdout.write(self.style.WARNING("   ⚠️ No recent news found on Google. Skipping cycle."))
                 return
+            
+            # Extract the top 5 links
+            results = []
+            for item in items[:5]:
+                results.append({
+                    'title': item.title.text,
+                    'href': item.link.text
+                })
+                
         except Exception as e:
             self.stdout.write(self.style.WARNING(f"   ⚠️ Search Engine Error: {e}. Skipping cycle."))
             return
@@ -108,7 +124,6 @@ class Command(BaseCommand):
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'Accept-Language': 'en-US,en;q=0.9',
-            'Referer': 'https://www.google.com/'
         }
         try:
             resp = requests.get(url, headers=headers, timeout=10)

@@ -4,6 +4,7 @@ import datetime
 from django.utils import timezone
 from django.core.management import call_command
 from django.core.management.base import BaseCommand
+from django.db import close_old_connections  # <-- Added import
 from news.models import Article 
 
 class Command(BaseCommand):
@@ -62,6 +63,9 @@ class Command(BaseCommand):
         }
 
         while True:
+            # 0. PREVENT DB TIMEOUTS
+            close_old_connections()  # <-- Added this line
+            
             # 1. PRIORITY SELECTION
             categories = ["TRIPURA", "NORTHEAST", "INDIA", "GLOBAL", "OTHERS"]
             weights = [50, 20, 15, 10, 5]
@@ -79,7 +83,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.MIGRATE_HEADING(f"\n--- 🎯 SELECTED: {chosen_category} ({candidate_topic}) ---"))
             
             try:
-                call_command('run_RraSHI', topic=candidate_topic)
+                call_command('run_RraSHI', candidate_topic)
                 
                 # Sleep between 20 to 40 minutes
                 wait_minutes = random.randint(20, 40)

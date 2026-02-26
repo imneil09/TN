@@ -67,4 +67,4 @@ class Article(models.Model):
         class ImageWrapper:
             def __init__(self, url): self.url = url
         # Logic: Use the real AI image if we have it, otherwise the placeholder
-        return ImageWrapper(self.image_url or "https://source.unsplash.com/random/800x600/?news")
+        return ImageWrapper(self.image_url or "https://picsum.photos/seed/news/800/600")

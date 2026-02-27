@@ -2,14 +2,18 @@ import requests
 import json
 import urllib.parse
 import re
-import base64
+import os
 from bs4 import BeautifulSoup
 from django.core.management.base import BaseCommand
 from news.models import Article, Category, District
 from google import genai 
+from dotenv import load_dotenv
 
-# Your official API Key
-GEMINI_API_KEY = "AIzaSyBrs3OFHheLrDPdQXX8AL6P0YUrEVas8lA" 
+# Load the secrets from your .env file
+load_dotenv()
+
+# Get the API key securely from the environment
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 
 class Command(BaseCommand):
     help = 'Worker script that fetches and writes the news article.'
@@ -18,6 +22,11 @@ class Command(BaseCommand):
         parser.add_argument('topic', type=str, help='Topic to search for')
 
     def handle(self, *args, **options):
+        # Double check that the API key was actually loaded
+        if not GEMINI_API_KEY:
+            self.stdout.write(self.style.ERROR("   ❌ Error: GEMINI_API_KEY not found. Make sure your .env file is set up correctly."))
+            return
+
         topic = options['topic']
         self.stdout.write(f"🔍 Worker Searching on Google News: {topic}...")
 
@@ -62,7 +71,8 @@ class Command(BaseCommand):
                 if not content_data: 
                     continue
                 
-                raw_text, extracted_image_url = content_data
+                # Unpack the 3 variables returned by the updated function
+                raw_text, extracted_image_url, real_url = content_data
                 
                 # Check if we got enough text to work with
                 if len(raw_text) < 400:
@@ -82,7 +92,8 @@ class Command(BaseCommand):
             RULES:
             1. CATEGORY: ONE of ["Tripura", "Northeast", "India", "Global", "Others"]
             2. DISTRICT: If Tripura, pick one from ["West Tripura", "Sepahijala", "Gomati", "South Tripura", "Khowai", "Dhalai", "Unakoti", "North Tripura"]. Else null.
-            3. FORMAT: JSON Only. Title, Subtitle, Body (HTML), Category, District.
+            3. FORMAT: You MUST respond ONLY with a valid JSON object using exactly these lowercase keys:
+            {{"title": "...", "subtitle": "...", "body": "...", "category": "...", "district": "..."}}
 
             RAW TEXT:
             {raw_text[:4500]}...
@@ -102,75 +113,72 @@ class Command(BaseCommand):
                     
                 data = json.loads(clean_json.strip())
                 
-                # Use the decoded URL for the database so it's a clean link
-                real_url = self.decode_google_news_url(url)
+                # Check if the AI actually returned the expected format
+                if not isinstance(data, dict):
+                    raise ValueError("AI did not return a dictionary object.")
+                
+                # Safely get fields, checking for both lower and uppercase keys
+                final_title = data.get('title') or data.get('Title')
+                
+                if not final_title:
+                    # Print the AI's output so you can see exactly why it failed
+                    self.stdout.write(self.style.ERROR(f"   ❌ AI output was: {clean_json[:200]}..."))
+                    raise ValueError("AI response missing 'title' field.")
+                
+                # Make sure these fields exist in the data dictionary before saving
+                data['title'] = final_title
+                data['subtitle'] = data.get('subtitle') or data.get('Subtitle') or ''
+                data['body'] = data.get('body') or data.get('Body') or ''
+                
+                cat = data.get('category') or data.get('Category') or 'Others'
+                data['category'] = cat
+                
+                dist = data.get('district') or data.get('District')
+                data['district'] = dist
+                
+                # Save using the resolved real_url
                 self.save_article(data, real_url, extracted_image_url)
                 
-                self.stdout.write(self.style.SUCCESS(f"   ✅ Published by RraSHI AI: {data['title']}"))
+                self.stdout.write(self.style.SUCCESS(f"   ✅ Published by RraSHI AI: {final_title}"))
                 processed_count += 1
 
+            except json.JSONDecodeError:
+                self.stdout.write(self.style.ERROR(f"   ❌ JSON Parsing Error. AI output was: {clean_json[:100]}..."))
             except Exception as e:
                 self.stdout.write(self.style.ERROR(f"   ❌ AI/Save Error: {e}"))
 
-    def decode_google_news_url(self, url):
-        """Extracts the real target URL from the Google News Base64 string to bypass bot detection."""
-        try:
-            if '/articles/' in url:
-                article_id = url.split('/articles/')[1].split('?')[0]
-                # Add padding for Base64 decoding
-                padding = 4 - (len(article_id) % 4)
-                article_id += "=" * padding
-                decoded_bytes = base64.urlsafe_b64decode(article_id)
-                decoded_str = decoded_bytes.decode('latin1', errors='ignore')
-                
-                # Find the first occurrence of an http/https URL inside the decoded protobuf
-                match = re.search(r'(https?://[a-zA-Z0-9\-._~:/?#\[\]@!$&\'()*+,;=%]+)', decoded_str)
-                if match:
-                    return match.group(1)
-        except Exception:
-            pass
-        return url
-
     def fetch_page_content(self, url):
-        # 1. Bypass Google News redirect completely
-        real_url = self.decode_google_news_url(url)
-        self.stdout.write(f"   🔗 Target URL -> {real_url[:60]}...")
-        
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.9',
-        }
+        self.stdout.write(f"   🔗 Following Link -> {url[:60]}...")
         
         try:
-            # 2. Fetch the real news site
-            resp = requests.get(real_url, headers=headers, timeout=15, allow_redirects=True)
-            # Ensure correct encoding (fixes weird characters)
-            resp.encoding = resp.apparent_encoding 
-            soup = BeautifulSoup(resp.text, 'html.parser')
+            # 1. Let requests follow the Google News redirect naturally
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+            }
+            redirect_resp = requests.get(url, headers=headers, timeout=20, allow_redirects=True)
+            real_url = redirect_resp.url  # This is the actual news site URL!
+            self.stdout.write(f"   📍 Target URL -> {real_url[:60]}...")
 
-            # 3. Clean the DOM (Remove Menus, Ads, Headers, Footers)
-            for element in soup(["script", "style", "nav", "header", "footer", "aside", "form", "noscript", "iframe", "button"]):
-                element.decompose()
-
-            # 4. Extract Text
-            # We grab all text directly from the body, removing the need to guess if they use <p> or <div> tags
-            raw_text = soup.body.get_text(separator=' ', strip=True) if soup.body else soup.get_text(separator=' ', strip=True)
-            
-            # Clean excessive whitespace
-            raw_text = re.sub(r'\s+', ' ', raw_text).strip()
-
-            # 5. Extract Image
+            # 2. Extract the Image using BeautifulSoup
             image_url = None
+            soup = BeautifulSoup(redirect_resp.text, 'html.parser')
             og_image = soup.find("meta", property="og:image")
-            if og_image:
+            if og_image: 
                 image_url = og_image.get("content")
             if not image_url:
                 tw_image = soup.find("meta", name="twitter:image")
-                if tw_image:
+                if tw_image: 
                     image_url = tw_image.get("content")
 
-            return raw_text, image_url
+            # 3. 🚀 THE MAGIC TRICK: Use Jina Reader to get the text for the AI
+            # This bypasses paywalls, JS blocks, and extracts pure article text.
+            jina_url = f"https://r.jina.ai/{real_url}"
+            jina_resp = requests.get(jina_url, timeout=25)
+            
+            raw_text = jina_resp.text
+
+            # Return the text, image, and the real URL
+            return raw_text, image_url, real_url
             
         except Exception as e:
             self.stdout.write(self.style.ERROR(f"   Scraping Error: {e}"))
